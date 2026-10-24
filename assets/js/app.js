@@ -315,7 +315,10 @@ async function initProductPage() {
   const savePct = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
   wrap.innerHTML = `
   <div class="pd-layout">
-    <div class="pd-gallery"><img src="${esc(p.image)}" alt="${esc(p.name)}"></div>
+    <div class="pd-gallery">
+      <img id="pd-main-img" src="${esc(p.image)}" alt="${esc(p.name)}">
+      ${(p.images && p.images.length > 1) ? `<div class="pd-thumbs">${p.images.map((src, i) => `<img src="${esc(src)}" data-full="${esc(src)}" class="${i === 0 ? "active" : ""}" alt="View ${i + 1}">`).join("")}</div>` : ""}
+    </div>
     <div class="pd-info">
       <div class="pc-cat">${esc(catLabel(p.category))}</div>
       <h1>${esc(p.name)}</h1>
@@ -346,6 +349,13 @@ async function initProductPage() {
   </div>`;
 
   let qty = 1;
+  const thumbs = wrap.querySelectorAll(".pd-thumbs img");
+  thumbs.forEach((t) => t.addEventListener("click", () => {
+    thumbs.forEach((x) => x.classList.remove("active"));
+    t.classList.add("active");
+    const main = $("#pd-main-img");
+    if (main) main.src = t.dataset.full;
+  }));
   $("#q-inc").addEventListener("click", () => { qty = Math.min(10, qty + 1); $("#q-val").textContent = qty; });
   $("#q-dec").addEventListener("click", () => { qty = Math.max(1, qty - 1); $("#q-val").textContent = qty; });
   $("#pd-add").addEventListener("click", () => { Cart.add(p.id, qty); openDrawer(); });
