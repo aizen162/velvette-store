@@ -236,5 +236,17 @@
     "images": [
       "assets/img/products/makeup-deal-2.webp"
     ]
+  },
+  {
+    "id": "v27",
+    "name": "White Pearl Necklace & Earrings Set",
+    "category": "necklaces",
+    "price": 1399,
+    "badge": "new",
+    "description": "Timeless elegance — a classic white pearl set with a single-strand necklace, matching bracelet and single-pearl drop earrings with gold hooks. Perfect for weddings, festive looks or gifting. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/pearl-set-1.webp",
+    "images": [
+      "assets/img/products/pearl-set-1.webp"
+    ]
   }
 ]
