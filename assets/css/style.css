@@ -226,6 +226,9 @@ header.site {
 .pd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; padding: 44px 0; align-items: start; }
 .pd-gallery { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); background: var(--blush-soft); }
 .pd-gallery img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.pd-thumbs { display: flex; gap: 8px; padding: 10px; background: #fff; overflow-x: auto; }
+.pd-thumbs img { width: 64px; height: 80px; flex: 0 0 auto; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; aspect-ratio: auto; }
+.pd-thumbs img.active { border-color: var(--rose); }
 .pd-info .pc-cat { font-size: 0.8rem; }
 .pd-info h1 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); margin: 8px 0 12px; line-height: 1.2; }
 .pd-rating { color: var(--gold); margin-bottom: 14px; font-size: 0.95rem; }
