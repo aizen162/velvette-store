@@ -39,5 +39,17 @@
     "images": [
       "assets/img/products/pearl-set-1.webp"
     ]
+  },
+  {
+    "id": "v28",
+    "name": "Rose Gold Makeup Brush Set",
+    "category": "makeup",
+    "price": 499,
+    "badge": "new",
+    "description": "8-piece rose-gold brush set — powder, foundation, blush, eyeshadow, blending and spoolie brushes with soft bristles and rose-gold ferrules. Stylish, travel-friendly, made for daily glam. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/brush-set-1.webp",
+    "images": [
+      "assets/img/products/brush-set-1.webp"
+    ]
   }
 ]
