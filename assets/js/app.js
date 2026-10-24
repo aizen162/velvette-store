@@ -316,19 +316,19 @@ async function initOffers() {
   const byId = (id) => products.find((p) => p.id === id);
   const bundles = [
     {
-      tag: "SKINCARE RITUAL", name: "Glow-Up Skincare Trio",
-      items: ["v10", "v06", "v08"], price: 1600,
-      note: "Cleanse → tone → hydrate. The complete daily glow routine.",
+      tag: "COMPLETE SET", name: "Velvette Complete Set",
+      items: ["v25", "v26", "v27"], price: 3999,
+      note: "Daisy jewelry set + makeup deal + pearl set. The full Velvette look.",
     },
     {
       tag: "JEWELRY COMBO", name: "Date-Night Jewelry Duo",
-      items: ["v11", "v19"], price: 2700,
-      note: "Rose gold pendant + pearl tennis bracelet. Unforgettable.",
+      items: ["v25", "v27"], price: 2799,
+      note: "Gold-plated daisy set + white pearl set. Unforgettable.",
     },
     {
-      tag: "MAKEUP ESSENTIALS", name: "Lipstick Lover Set",
-      items: ["v01", "v01"], price: 800, qtyNote: "2 × Velvet Matte Lipstick",
-      note: "Two shades, endless looks. Gift one, keep one.",
+      tag: "GLOW DUO", name: "Glow Duo",
+      items: ["v26", "v27"], price: 2499,
+      note: "Makeup deal + pearl set. Base routine and timeless pearls.",
     },
   ];
   grid.innerHTML = bundles.map((b, i) => {
