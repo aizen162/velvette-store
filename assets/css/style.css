@@ -423,3 +423,153 @@ footer.site { background: var(--plum); color: #f3dfe6; margin-top: 20px; }
   .cart-layout { grid-template-columns: 1fr; }
   .cart-summary { position: static; }
 }
+
+/* ============================================================
+   REDESIGN — Clothzia-inspired layout, Velvette light theme
+   (appended 2026-10-24; original theme variables untouched)
+   ============================================================ */
+
+/* ---------- new hero ---------- */
+.hero-new {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 18% 8%, var(--blush) 0%, transparent 55%),
+    radial-gradient(ellipse at 88% 90%, #f6cfdb 0%, transparent 50%),
+    var(--cream);
+  padding: 46px 0 56px;
+  overflow: hidden;
+}
+.hero-vertical {
+  position: absolute; left: 18px; top: 50%; transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl; letter-spacing: 6px; font-size: 0.72rem; font-weight: 600;
+  color: var(--rose); opacity: 0.75; z-index: 1;
+}
+.hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 36px; align-items: center; position: relative; z-index: 2; }
+.mega {
+  font-family: var(--font-head); font-weight: 700; line-height: 0.95;
+  font-size: clamp(3.4rem, 9vw, 7.5rem); letter-spacing: 3px; color: var(--plum);
+  margin: 6px 0 22px;
+}
+.mega .gold-letter {
+  background: linear-gradient(160deg, var(--gold-soft), var(--gold) 60%, #b8922e);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-style: italic;
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px; padding: 26px 28px; box-shadow: var(--shadow-lg);
+  max-width: 54ch;
+}
+.glass-tagline { color: var(--plum-soft); font-size: 1.08rem; margin-bottom: 20px; }
+.glass-tagline em { color: var(--rose); font-family: var(--font-head); font-size: 1.2rem; }
+
+/* floating 3D ornaments (CSS orbs + mouse parallax) */
+.orb { position: absolute; border-radius: 50%; filter: blur(2px); z-index: 1; pointer-events: none; transition: transform 0.3s ease-out; }
+.orb-gold {
+  width: 130px; height: 130px; right: 8%; top: 12%;
+  background: radial-gradient(circle at 32% 30%, #fdf3cf, var(--gold) 65%, #b8922e);
+  box-shadow: 0 20px 50px rgba(212, 175, 55, 0.45); animation: orbFloat 7s ease-in-out infinite;
+}
+.orb-blush {
+  width: 90px; height: 90px; left: 44%; bottom: 8%;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--blush) 70%);
+  box-shadow: 0 16px 40px rgba(183, 110, 121, 0.35); animation: orbFloat 9s ease-in-out infinite reverse;
+}
+.orb-rose {
+  width: 56px; height: 56px; right: 42%; top: 10%;
+  background: radial-gradient(circle at 35% 30%, #f6cfdb, var(--rose) 70%);
+  box-shadow: 0 12px 30px rgba(183, 110, 121, 0.4); animation: orbFloat 6s ease-in-out infinite;
+}
+@keyframes orbFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -16px; }
+}
+
+/* hero photo slider (crossfade, real product photos only) */
+.hero-slider { position: relative; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 4 / 4.6; background: var(--blush-soft); }
+.hero-slides, .hero-slides a { position: absolute; inset: 0; }
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease; }
+.hero-slide.active { opacity: 1; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+.hero-slide .hs-cap {
+  position: absolute; left: 16px; bottom: 16px; right: 16px;
+  background: rgba(255, 248, 243, 0.88); backdrop-filter: blur(8px);
+  border-radius: 14px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+}
+.hero-slide .hs-cap b { font-family: var(--font-head); font-size: 1rem; line-height: 1.25; }
+.hero-slide .hs-cap span { font-weight: 700; color: var(--rose-dark); white-space: nowrap; }
+.hero-dots { position: absolute; left: 50%; transform: translateX(-50%); bottom: 84px; display: flex; gap: 8px; z-index: 3; }
+.hero-dots button {
+  width: 26px; height: 7px; border-radius: 999px; border: none; cursor: pointer;
+  background: rgba(255, 255, 255, 0.75); transition: all 0.25s;
+}
+.hero-dots button.active { width: 40px; background: var(--gold); }
+
+/* ---------- marquee ---------- */
+.marquee {
+  background: var(--plum); color: var(--gold-soft); overflow: hidden;
+  padding: 11px 0; font-size: 0.85rem; letter-spacing: 2.5px; font-weight: 600; white-space: nowrap;
+}
+.marquee-track { display: inline-flex; animation: marqueeScroll 28s linear infinite; }
+@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- 3D showcase section ---------- */
+.showcase-3d { padding-top: 30px; }
+.showcase-3d #hero-3d { background: radial-gradient(ellipse at 50% 45%, #fff 0%, var(--blush-soft) 70%); }
+
+/* ---------- homepage pills + sale banner ---------- */
+.home-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 26px; }
+.home-pills .pill { font-size: 0.95rem; padding: 10px 22px; }
+.sale-banner {
+  background: linear-gradient(120deg, var(--plum), #5c2c44 60%, var(--rose-dark));
+  color: #fff; border-radius: var(--radius); margin: 6px auto 10px;
+  padding: 30px 34px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  box-shadow: var(--shadow-lg); flex-wrap: wrap;
+}
+.sale-banner h3 { font-size: 1.7rem; margin-bottom: 4px; }
+.sale-banner p { color: #f6dfe7; font-size: 0.95rem; max-width: 58ch; }
+.sale-eyebrow { color: var(--gold-soft); letter-spacing: 3px; font-size: 0.78rem; font-weight: 600; margin-bottom: 6px; }
+
+/* ---------- product card rating + tilt ---------- */
+.pc-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 2px; }
+.pc-stars span { color: var(--muted); font-size: 0.8rem; letter-spacing: 0; margin-left: 4px; }
+.product-card.tiltable { transition: transform 0.18s ease, box-shadow 0.2s; }
+
+/* ---------- scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track, .orb { animation: none; }
+}
+
+/* ---------- navbar icon ---------- */
+.nav-icon {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  border: 1.5px solid rgba(183, 110, 121, 0.4); background: #fff; font-size: 1.05rem;
+  transition: all 0.18s;
+}
+.nav-icon:hover { border-color: var(--rose); transform: translateY(-2px); }
+
+/* ---------- cart page polish ---------- */
+.cart-item { border: 1px solid rgba(183, 110, 121, 0.18); border-left: 4px solid var(--gold); }
+.cart-item img { width: 96px; height: 96px; }
+.cart-summary { border: 1px solid rgba(212, 175, 55, 0.45); }
+.cart-summary h3 { font-size: 1.35rem; }
+
+/* ---------- redesign responsive ---------- */
+@media (max-width: 1000px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-vertical { display: none; }
+  .hero-slider { aspect-ratio: 4 / 3.4; max-width: 560px; margin: 0 auto; width: 100%; }
+  .orb-gold { width: 90px; height: 90px; }
+  .orb-blush, .orb-rose { display: none; }
+}
+@media (max-width: 640px) {
+  .mega { font-size: clamp(3rem, 16vw, 4.2rem); }
+  .glass-card { padding: 20px; }
+  .sale-banner { padding: 24px 20px; }
+  .sale-banner h3 { font-size: 1.35rem; }
+}
