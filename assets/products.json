@@ -51,5 +51,17 @@
     "images": [
       "assets/img/products/brush-set-1.webp"
     ]
+  },
+  {
+    "id": "v29",
+    "name": "Liquid Highlighter",
+    "category": "makeup",
+    "price": 599,
+    "badge": "new",
+    "description": "Liquid illuminator drops for a lit-from-within glow — blend on cheekbones, brow bone and nose, or mix with foundation. Lightweight, long-lasting shine for bridal and everyday looks. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/highlighter-1.webp",
+    "images": [
+      "assets/img/products/highlighter-1.webp"
+    ]
   }
 ]
