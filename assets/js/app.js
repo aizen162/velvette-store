@@ -57,7 +57,7 @@ function toast(msg) {
 const Cart = {
   key: "velvette_cart_v1",
   items() { try { return JSON.parse(localStorage.getItem(this.key)) || []; } catch { return []; } },
-  save(items) { localStorage.setItem(this.key, JSON.stringify(items)); updateCartBadge(); renderDrawer(); },
+  save(items) { localStorage.setItem(this.key, JSON.stringify(items)); updateCartBadge(); },
   add(id, qty = 1) {
     const items = this.items();
     const line = items.find((i) => i.id === id);
@@ -100,96 +100,8 @@ function initNav() {
   $$(".nav-links a").forEach((a) => {
     if (a.getAttribute("href") === path) a.classList.add("active");
   });
-  // Drawer open/close buttons
-  $$("[data-open-cart]").forEach((b) => b.addEventListener("click", openDrawer));
-  $(".drawer-overlay")?.addEventListener("click", closeDrawer);
-  $(".cd-close")?.addEventListener("click", closeDrawer);
 }
 
-function openDrawer() { $(".cart-drawer")?.classList.add("open"); $(".drawer-overlay")?.classList.add("show"); renderDrawer(); }
-function closeDrawer() { $(".cart-drawer")?.classList.remove("open"); $(".drawer-overlay")?.classList.remove("show"); }
-
-async function renderDrawer() {
-  const itemsWrap = $("#cd-items");
-  const foot = $("#cd-foot");
-  if (!itemsWrap || !foot) return;
-  const products = await getProducts();
-  const { lines, subtotal, shipping, total } = totalsFor(Cart.items(), products);
-
-  if (!lines.length) {
-    itemsWrap.innerHTML = `<div class="cd-empty"><div class="big">🛍️</div><h3>Your bag is empty</h3><p style="margin:8px 0 18px;font-size:.9rem">Pretty things are waiting for you…</p><a class="btn btn-sm" href="shop.html">Shop Now</a></div>`;
-    foot.innerHTML = "";
-    return;
-  }
-
-  itemsWrap.innerHTML = lines.map((i) => `
-    <div class="cd-item">
-      <a href="product.html?id=${esc(i.p.id)}"><img src="${esc(i.p.image)}" alt="${esc(i.p.name)}"></a>
-      <div>
-        <div class="n">${esc(i.p.name)}</div>
-        <div class="p">${fmtRs(i.p.price)} each</div>
-        <div class="cd-qty" style="margin-top:6px">
-          <button data-dec="${esc(i.id)}" aria-label="decrease">−</button>
-          <span>${i.qty}</span>
-          <button data-inc="${esc(i.id)}" aria-label="increase">+</button>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-weight:700">${fmtRs(i.p.price * i.qty)}</div>
-        <button class="cd-remove" data-del="${esc(i.id)}">remove</button>
-      </div>
-    </div>`).join("");
-
-  foot.innerHTML = `
-    ${shipping > 0 ? `<div class="free-ship">Add ${fmtRs(CONFIG.freeShippingOver - subtotal)} more for <b>FREE delivery</b> 🚚</div>` : ""}
-    <div class="sum-row"><span>Subtotal</span><span>${fmtRs(subtotal)}</span></div>
-    <div class="sum-row"><span>Delivery (all Pakistan)</span><span>${shipping === 0 ? "FREE 🎉" : fmtRs(shipping)}</span></div>
-    <div class="sum-row total"><span>Total</span><span>${fmtRs(total)}</span></div>
-    <form class="checkout-form" id="checkout-form">
-      <h4>Delivery Details</h4>
-      <div class="field"><input name="name" required placeholder="Full Name *"></div>
-      <div class="field"><input name="phone" required placeholder="Phone / WhatsApp *"></div>
-      <div class="field"><input name="address" required placeholder="House, street, area *"></div>
-      <div class="field"><input name="city" required placeholder="City *"></div>
-      <div class="cod-note">💵 <b>Cash on Delivery</b> available — pay when your order arrives.</div>
-      <button type="submit" class="btn wa-btn btn-block" style="margin-top:4px">📲 Order via WhatsApp</button>
-      <p class="form-note">You'll be redirected to WhatsApp with your order pre-written.</p>
-    </form>`;
-
-  $$("[data-inc]", itemsWrap).forEach((b) => b.addEventListener("click", () => {
-    const l = Cart.items().find((x) => x.id === b.dataset.inc);
-    Cart.setQty(b.dataset.inc, (l?.qty || 0) + 1);
-  }));
-  $$("[data-dec]", itemsWrap).forEach((b) => b.addEventListener("click", () => {
-    const l = Cart.items().find((x) => x.id === b.dataset.dec);
-    Cart.setQty(b.dataset.dec, (l?.qty || 1) - 1);
-  }));
-  $$("[data-del]", itemsWrap).forEach((b) => b.addEventListener("click", () => Cart.remove(b.dataset.del)));
-
-  $("#checkout-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const fd = new FormData(e.target);
-    const orderLines = lines.map((i, n) => `${n + 1}. ${i.p.name} x${i.qty} — ${fmtRs(i.p.price * i.qty)}`);
-    const msg =
-`🛍️ *NEW ORDER — VELVETTE*
---------------------------
-${orderLines.join("\n")}
---------------------------
-Subtotal: ${fmtRs(subtotal)}
-Delivery: ${shipping === 0 ? "FREE" : fmtRs(shipping)}
-*Total (COD): ${fmtRs(total)}*
-
-👤 Name: ${fd.get("name")}
-📞 Phone: ${fd.get("phone")}
-📍 Address: ${fd.get("address")}
-🏙️ City: ${fd.get("city")}
-
-🎁 Ask us for your *Velvette Rewards* order code after confirmation — 5 orders = 1 FREE gift!`;
-    window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
-    toast("Opening WhatsApp… send the message to confirm ✅");
-    Cart.clear();
-  });
-}
 
 /* ---------------- product cards ---------------- */
 function badgeHTML(p) {
@@ -221,7 +133,7 @@ function productCard(p, tiltable = false) {
 function bindAddButtons(scope = document) {
   $$("[data-add]", scope).forEach((b) => {
     if (b._bound) return; b._bound = true;
-    b.addEventListener("click", () => { Cart.add(b.dataset.add); openDrawer(); });
+    b.addEventListener("click", () => { Cart.add(b.dataset.add); });
   });
 }
 
@@ -358,7 +270,7 @@ async function initProductPage() {
   }));
   $("#q-inc").addEventListener("click", () => { qty = Math.min(10, qty + 1); $("#q-val").textContent = qty; });
   $("#q-dec").addEventListener("click", () => { qty = Math.max(1, qty - 1); $("#q-val").textContent = qty; });
-  $("#pd-add").addEventListener("click", () => { Cart.add(p.id, qty); openDrawer(); });
+  $("#pd-add").addEventListener("click", () => { Cart.add(p.id, qty); });
   $("#pd-buy").addEventListener("click", (e) => {
     e.preventDefault();
     const msg = `💖 *I want to order from VELVETTE*\n\n${p.name} x${qty} — ${fmtRs(p.price * qty)}\n\nMy name:\nMy address:\nMy city:`;
@@ -452,6 +364,113 @@ My city:`;
   }));
 }
 
+/* ---------------- cart page ---------------- */
+async function initCartPage() {
+  const wrap = $("#cart-wrap");
+  if (!wrap) return;
+  const products = await getProducts();
+
+  function render() {
+    const { lines, subtotal, shipping, total } = totalsFor(Cart.items(), products);
+
+    if (!lines.length) {
+      wrap.innerHTML = `
+        <div class="cart-empty">
+          <div class="big">🛍️</div>
+          <h2 class="serif">Your bag is empty</h2>
+          <p>Pretty things are waiting for you…</p>
+          <a class="btn" href="shop.html" style="margin-top:14px">Shop Now 💖</a>
+        </div>`;
+      updateCartBadge();
+      return;
+    }
+
+    wrap.innerHTML = `
+    <div class="cart-layout">
+      <div class="cart-items">
+        ${lines.map((i) => `
+        <div class="cart-item">
+          <a href="product.html?id=${esc(i.p.id)}"><img src="${esc(i.p.image)}" alt="${esc(i.p.name)}"></a>
+          <div class="ci-info">
+            <a href="product.html?id=${esc(i.p.id)}" class="ci-name">${esc(i.p.name)}</a>
+            <div class="ci-price">${fmtRs(i.p.price)} each</div>
+            <div class="qty-stepper">
+              <button data-dec="${esc(i.id)}" aria-label="decrease">−</button>
+              <span>${i.qty}</span>
+              <button data-inc="${esc(i.id)}" aria-label="increase">+</button>
+            </div>
+          </div>
+          <div class="ci-right">
+            <div class="ci-total">${fmtRs(i.p.price * i.qty)}</div>
+            <button class="ci-remove" data-del="${esc(i.id)}">remove</button>
+          </div>
+        </div>`).join("")}
+        <a href="shop.html" class="continue-link">← Continue shopping</a>
+      </div>
+      <aside class="cart-summary">
+        <h3 class="serif">Order Summary</h3>
+        ${shipping > 0 ? `<div class="free-ship">Add ${fmtRs(CONFIG.freeShippingOver - subtotal)} more for <b>FREE delivery</b> 🚚</div>` : ""}
+        <div class="sum-row"><span>Subtotal (${Cart.count()} items)</span><span>${fmtRs(subtotal)}</span></div>
+        <div class="sum-row"><span>Delivery (all Pakistan)</span><span>${shipping === 0 ? "FREE 🎉" : fmtRs(shipping)}</span></div>
+        <div class="sum-row total"><span>Total</span><span>${fmtRs(total)}</span></div>
+        <form class="checkout-form" id="cart-checkout-form">
+          <h4>Delivery Details</h4>
+          <div class="field"><input name="name" required placeholder="Full Name *" autocomplete="name"></div>
+          <div class="field"><input name="phone" required placeholder="Phone / WhatsApp *" autocomplete="tel"></div>
+          <div class="field"><input name="address" required placeholder="House, street, area *"></div>
+          <div class="field"><input name="city" required placeholder="City *"></div>
+          <div class="cod-note">💵 <b>Cash on Delivery</b> available — pay when your order arrives.</div>
+          <button type="submit" class="btn wa-btn btn-block" style="margin-top:4px">📲 Order via WhatsApp</button>
+          <p class="form-note">You'll be redirected to WhatsApp with your order pre-written.</p>
+        </form>
+      </aside>
+    </div>`;
+
+    $$("[data-inc]", wrap).forEach((b) => b.addEventListener("click", () => {
+      const l = Cart.items().find((x) => x.id === b.dataset.inc);
+      Cart.setQty(b.dataset.inc, (l?.qty || 0) + 1);
+      render();
+    }));
+    $$("[data-dec]", wrap).forEach((b) => b.addEventListener("click", () => {
+      const l = Cart.items().find((x) => x.id === b.dataset.dec);
+      Cart.setQty(b.dataset.dec, (l?.qty || 1) - 1);
+      render();
+    }));
+    $$("[data-del]", wrap).forEach((b) => b.addEventListener("click", () => {
+      Cart.remove(b.dataset.del);
+      render();
+    }));
+
+    $("#cart-checkout-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const orderLines = lines.map((i, n) => `${n + 1}. ${i.p.name} x${i.qty} — ${fmtRs(i.p.price * i.qty)}`);
+      const msg =
+`🛍️ *NEW ORDER — VELVETTE*
+--------------------------
+${orderLines.join("\n")}
+--------------------------
+Subtotal: ${fmtRs(subtotal)}
+Delivery: ${shipping === 0 ? "FREE" : fmtRs(shipping)}
+*Total (COD): ${fmtRs(total)}*
+
+👤 Name: ${fd.get("name")}
+📞 Phone: ${fd.get("phone")}
+📍 Address: ${fd.get("address")}
+🏙️ City: ${fd.get("city")}
+
+🎁 Ask us for your *Velvette Rewards* order code after confirmation — 5 orders = 1 FREE gift!`;
+      window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
+      toast("Opening WhatsApp… send the message to confirm ✅");
+      Cart.clear();
+      render();
+    });
+    updateCartBadge();
+  }
+
+  render();
+}
+
 /* ---------------- boot ---------------- */
 document.addEventListener("DOMContentLoaded", () => {
   initNav();
@@ -460,4 +479,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initProductPage();
   initOffers();
   initCountdown();
+  initCartPage();
 });
