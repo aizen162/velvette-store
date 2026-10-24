@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Velvette — Beauty & Jewelry</title>
-<meta name="description" content="Velvette — premium cosmetics, skincare and rose-gold jewelry delivered all over Pakistan. Cash on Delivery available.">
+<meta name="description" content="Velvette — premium cosmetics and rose-gold jewelry delivered all over Pakistan. Cash on Delivery available.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,21 +24,29 @@
       <a href="loyalty.html">Rewards</a>
     </nav>
     <div class="nav-actions">
+      <a class="nav-icon" href="shop.html#search" aria-label="Search">🔍</a>
       <a class="cart-btn" href="cart.html">🛍️ <span class="btn-label">Bag</span> <span class="cart-count">0</span></a>
       <button class="hamburger" aria-label="menu">☰</button>
     </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container hero-inner">
-    <div>
+<!-- ============ HERO : giant headline + glass card + photo slider ============ -->
+<section class="hero-new" id="hero">
+  <div class="hero-vertical" aria-hidden="true">BEAUTY &nbsp;·&nbsp; JEWELRY &nbsp;·&nbsp; PAKISTAN</div>
+  <div class="orb orb-gold" data-depth="26" aria-hidden="true"></div>
+  <div class="orb orb-blush" data-depth="16" aria-hidden="true"></div>
+  <div class="orb orb-rose" data-depth="38" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
       <div class="hero-eyebrow">BEAUTY & JEWELRY · PAKISTAN</div>
-      <h1>Glow like <em>you</em> mean it. ✨</h1>
-      <p class="lead">Premium makeup, skincare and rose-gold jewelry — handpicked for her, delivered to your doorstep anywhere in Pakistan.</p>
-      <div class="hero-ctas">
-        <a class="btn" href="shop.html">Shop the Collection</a>
-        <a class="btn btn-outline" href="offers.html">Today's Offers 🎁</a>
+      <h1 class="mega">VELVETT<span class="gold-letter">E</span></h1>
+      <div class="glass-card">
+        <p class="glass-tagline">Glow like <em>you</em> mean it. ✨ Premium makeup and rose-gold jewelry — handpicked for her, delivered to your doorstep anywhere in Pakistan.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="shop.html">Shop Now 💖</a>
+          <a class="btn btn-outline" href="offers.html">Today's Offers 🎁</a>
+        </div>
       </div>
       <div class="hero-badges">
         <span>💵 Cash on Delivery</span>
@@ -46,61 +54,77 @@
         <span>↩️ 7-Day Exchange</span>
       </div>
     </div>
-    <div>
-      <canvas id="hero-3d"></canvas>
-      <div class="hero-hint">✦ DRAG TO SPIN · TAP A PRODUCT TO VIEW ✦</div>
+    <div class="hero-slider" id="hero-slider" aria-label="Featured products">
+      <div class="hero-slides" id="hero-slides"></div>
+      <div class="hero-dots" id="hero-dots"></div>
     </div>
   </div>
 </section>
 
-<div class="container">
-  <a href="offers.html" style="display:block">
-    <div class="offer-banner">
-      <div>
-        <h3 class="serif">🔥 Launch Week Offer — Flat 20% OFF orders over Rs 3,000</h3>
-        <p>Use code <b>VELVETTE20</b> on WhatsApp when you order. Hurry — ends soon!</p>
-      </div>
-      <div class="countdown" data-countdown></div>
-    </div>
-  </a>
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>FREE DELIVERY OVER RS 2,500 ✦ CASH ON DELIVERY ✦ 7-DAY RETURNS ✦ VELVETTE REWARDS ✦ BEAUTY & JEWELRY ✦&nbsp;</span>
+    <span>FREE DELIVERY OVER RS 2,500 ✦ CASH ON DELIVERY ✦ 7-DAY RETURNS ✦ VELVETTE REWARDS ✦ BEAUTY & JEWELRY ✦&nbsp;</span>
+  </div>
 </div>
 
-<section class="section" style="padding-top:10px">
+<!-- ============ 3D SHOWCASE (kept, unchanged engine) ============ -->
+<section class="section showcase-3d reveal">
   <div class="container">
     <div class="section-head">
+      <div class="kicker">SPIN THE COLLECTION</div>
+      <h2>Drag It. Love It. Tap It.</h2>
+      <p>Our 3D showcase — spin the ring and tap any piece to view it.</p>
+    </div>
+    <canvas id="hero-3d"></canvas>
+    <div class="hero-hint">✦ DRAG TO SPIN · TAP A PRODUCT TO VIEW ✦</div>
+  </div>
+</section>
+
+<!-- ============ CATEGORY PILLS + SALE BANNER ============ -->
+<section class="section" style="padding-top:10px">
+  <div class="container">
+    <div class="section-head reveal">
       <div class="kicker">BROWSE BY CATEGORY</div>
       <h2>Find Your Obsession</h2>
       <p>From everyday glow to statement jewelry — everything a girl could want, in one place.</p>
     </div>
-    <div class="cat-grid">
-      <a class="cat-tile" href="shop.html?cat=makeup"><div class="icon">💄</div><h3>Makeup</h3><small>5 products</small></a>
-      <a class="cat-tile" href="shop.html?cat=skincare"><div class="icon">🧴</div><h3>Skincare</h3><small>5 products</small></a>
-      <a class="cat-tile" href="shop.html?cat=necklaces"><div class="icon">💎</div><h3>Necklaces & Chains</h3><small>5 products</small></a>
-      <a class="cat-tile" href="shop.html?cat=bracelets"><div class="icon">📿</div><h3>Bracelets</h3><small>4 products</small></a>
-      <a class="cat-tile" href="shop.html?cat=accessories"><div class="icon">👜</div><h3>Accessories</h3><small>5 products</small></a>
-    </div>
+    <div class="home-pills reveal" id="home-pills"></div>
+    <div class="cat-grid reveal" id="cat-grid"></div>
   </div>
 </section>
 
+<div class="container">
+  <div class="sale-banner reveal">
+    <div>
+      <div class="sale-eyebrow">VELVETTE REWARDS 🎁</div>
+      <h3 class="serif">Free delivery over Rs 2,500</h3>
+      <p>Flat Rs 180 delivery all over Pakistan — free over Rs 2,500. Plus every order earns a Rewards code: 5 orders = 1 FREE gift.</p>
+    </div>
+    <a class="btn btn-gold" href="offers.html">See Bundle Offers →</a>
+  </div>
+</div>
+
 <section class="section" style="background:var(--blush-soft)">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="kicker">MOST LOVED</div>
       <h2>Bestsellers & New Arrivals</h2>
       <p>The pieces our customers can't stop raving about.</p>
     </div>
-    <div class="grid" id="featured-grid"></div>
-    <div style="text-align:center;margin-top:34px"><a class="btn btn-outline" href="shop.html">View All 24 Products →</a></div>
+    <div class="grid reveal" id="featured-grid"></div>
+    <div style="text-align:center;margin-top:34px"><a class="btn btn-outline" id="view-all-link" href="shop.html">View All Products →</a></div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="kicker">THE VELVETTE PROMISE</div>
       <h2>Shopping, Made Delightful</h2>
     </div>
-    <div class="perks">
+    <div class="perks reveal">
       <div class="perk"><div class="e">🚚</div><h4>Nationwide Delivery</h4><p>We deliver all over Pakistan — flat Rs 180, FREE over Rs 2,500.</p></div>
       <div class="perk"><div class="e">💵</div><h4>Cash on Delivery</h4><p>Pay in cash when your order arrives. Zero risk.</p></div>
       <div class="perk"><div class="e">🎁</div><h4>Velvette Rewards</h4><p>Every order earns a rewards code — 5 codes = 1 FREE gift.</p></div>
@@ -110,7 +134,7 @@
 </section>
 
 <div class="container">
-  <div class="insta-strip">
+  <div class="insta-strip reveal">
     <h3 class="serif">Follow the Glow ✨</h3>
     <p>Daily beauty tips, new drops and exclusive follower deals.</p>
     <a class="btn" href="https://wa.me/923335017388" target="_blank" rel="noopener">Chat With Us on WhatsApp 💬</a>
@@ -122,11 +146,11 @@
   <div class="container foot-grid">
     <div class="foot-brand">
       <div class="logo-name">VELVETTE</div>
-      <p>Beauty & jewelry, made for her. Premium cosmetics, skincare and rose-gold jewelry delivered to your doorstep anywhere in Pakistan.</p>
+      <p>Beauty & jewelry, made for her. Premium cosmetics and rose-gold jewelry delivered to your doorstep anywhere in Pakistan.</p>
     </div>
-    <div><h4>Shop</h4><a href="shop.html?cat=makeup">Makeup</a><a href="shop.html?cat=skincare">Skincare</a><a href="shop.html?cat=necklaces">Necklaces & Chains</a><a href="shop.html?cat=bracelets">Bracelets</a><a href="shop.html?cat=accessories">Accessories</a></div>
+    <div><h4>Shop</h4><a href="shop.html">All Products</a><a href="shop.html?cat=makeup">Makeup</a><a href="shop.html?cat=necklaces">Necklaces & Chains</a></div>
     <div><h4>Velvette</h4><a href="offers.html">Offers</a><a href="loyalty.html">Velvette Rewards</a><a href="shop.html">All Products</a></div>
-    <div><h4>Contact</h4><a href="https://wa.me/923335017388" target="_blank" rel="noopener">WhatsApp Us 💬</a><a href="loyalty.html">Track Rewards</a></div>
+    <div><h4>Contact</h4><a href="https://wa.me/923335017388" target="_blank" rel="noopener">WhatsApp Us 💬</a><a href="https://www.instagram.com/velvette.pk1/" target="_blank" rel="noopener">Instagram 📸</a><a href="loyalty.html">Track Rewards</a></div>
   </div>
   <div class="foot-bottom">© 2026 Velvette · Beauty & Jewelry · Made with 💖 in Pakistan</div>
 </footer>
