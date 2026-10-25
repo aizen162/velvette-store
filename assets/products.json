@@ -101,5 +101,35 @@
         "image": "assets/img/products/review-daniyal-01.jpg"
       }
     ]
+  },
+  {
+    "id": "v31",
+    "name": "Blue Star Baby Fruit Feeder BPA-Free Silicone",
+    "category": "babies",
+    "price": 599,
+    "badge": "new",
+    "description": "BPA-free silicone baby fruit feeder with a blue star-grip handle and transparent feeding chamber — gentle on gums, wide opening to prevent choking, secure latch to prevent spills. Dishwasher safe and sterilizable with boiling water. A safe way to introduce fruits and vegetables to your baby. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/baby-fruit-feeder-01.jpg",
+    "images": [
+      "assets/img/products/baby-fruit-feeder-01.jpg"
+    ],
+    "reviews": [
+      {
+        "name": "Verified buyer",
+        "rating": 5,
+        "text": "Customer ko pasand ai hn price thori kam kry",
+        "image": "assets/img/products/review-feeder-01.jpg"
+      },
+      {
+        "name": "Verified buyer",
+        "rating": 5,
+        "text": "mashaallah bhoth axhi thi customer ko bahut acchi lagi Thi delivery thodi si let thi per quality bahut acchi thi"
+      },
+      {
+        "name": "CosmoCouture",
+        "rating": 5,
+        "text": "good product same as shown in picture"
+      }
+    ]
   }
 ]
