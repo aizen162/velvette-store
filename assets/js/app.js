@@ -31,7 +31,21 @@ const CATEGORIES = {
   necklaces: { label: "Necklaces & Chains", icon: "💎" },
   bracelets: { label: "Bracelets", icon: "📿" },
   accessories: { label: "Accessories", icon: "👜" },
+  babies: { label: "Babies", icon: "🍼" },
 };
+
+/* Shop sections: two top-level tabs. A product's section comes from its
+   category; unknown categories default to beauty. Add future baby
+   sub-categories to the babies list and they land in the Babies tab. */
+const SECTIONS = {
+  beauty: { label: "Cosmetics & Makeup", icon: "💄", cats: ["makeup", "skincare", "necklaces", "bracelets", "accessories"] },
+  babies: { label: "Babies", icon: "🍼", cats: ["babies"] },
+};
+
+function sectionOf(cat) {
+  for (const [key, s] of Object.entries(SECTIONS)) if (s.cats.includes(cat)) return key;
+  return "beauty";
+}
 
 function catLabel(cat) { return CATEGORIES[cat]?.label || cat; }
 
@@ -156,13 +170,20 @@ async function initHome() {
   const cats = Object.keys(counts);
   const catGrid = $("#cat-grid");
   if (catGrid) {
+    // Babies teaser: visible before the first baby product lands, so the
+    // section is discoverable; hidden automatically once real baby
+    // products appear in the catalog (they get their own tile above).
+    const babiesTeaser = cats.includes("babies") ? "" :
+      `<a class="cat-tile" href="shop.html?section=babies"><div class="icon">🍼</div><h3>Babies</h3><small>Coming soon</small></a>`;
     catGrid.innerHTML = cats.map((c) => `
-      <a class="cat-tile" href="shop.html?cat=${esc(c)}"><div class="icon">${CATEGORIES[c]?.icon || "✨"}</div><h3>${esc(catLabel(c))}</h3><small>${counts[c]} product${counts[c] > 1 ? "s" : ""}</small></a>`).join("");
+      <a class="cat-tile" href="shop.html?cat=${esc(c)}"><div class="icon">${CATEGORIES[c]?.icon || "✨"}</div><h3>${esc(catLabel(c))}</h3><small>${counts[c]} product${counts[c] > 1 ? "s" : ""}</small></a>`).join("") + babiesTeaser;
   }
   const homePills = $("#home-pills");
   if (homePills) {
+    const babiesPill = cats.includes("babies") ? "" : `<a class="pill" href="shop.html?section=babies">🍼 Babies</a>`;
     homePills.innerHTML = [`<a class="pill active" href="shop.html">All</a>`,
-      ...cats.map((c) => `<a class="pill" href="shop.html?cat=${esc(c)}">${CATEGORIES[c]?.icon || "✨"} ${esc(catLabel(c))}</a>`)
+      ...cats.map((c) => `<a class="pill" href="shop.html?cat=${esc(c)}">${CATEGORIES[c]?.icon || "✨"} ${esc(catLabel(c))}</a>`),
+      babiesPill
     ].join("");
   }
 
@@ -244,22 +265,53 @@ async function initShop() {
   if (!grid) return;
   const products = await getProducts();
   const params = new URLSearchParams(location.search);
+  const sectionParam = params.get("section");
+  const catParam = params.get("cat") || "all";
   let state = {
-    cat: params.get("cat") || "all",
+    // ?section= wins; otherwise the section follows the ?cat= link
+    // (a baby category opens the Babies tab); default is beauty.
+    section: SECTIONS[sectionParam] ? sectionParam : sectionOf(catParam === "all" ? "" : catParam),
+    cat: catParam,
     q: params.get("q") || "",
     sort: "featured",
   };
 
+  const toggle = $("#section-toggle");
   const pills = $("#filter-pills");
-  const catsInCatalog = [...new Set(products.map((p) => p.category))];
-  pills.innerHTML = [`<button class="pill" data-cat="all">All</button>`,
-    ...catsInCatalog.map((k) => `<button class="pill" data-cat="${k}">${CATEGORIES[k]?.icon || "✨"} ${catLabel(k)}</button>`)
-  ].join("");
-  $$(".pill", pills).forEach((p) => p.addEventListener("click", () => {
-    state.cat = p.dataset.cat;
-    $$(".pill", pills).forEach((x) => x.classList.toggle("active", x === p));
-    render();
-  }));
+
+  function renderToggle() {
+    if (!toggle) return;
+    toggle.innerHTML = Object.entries(SECTIONS).map(([key, s]) =>
+      `<button class="pill${state.section === key ? " active" : ""}" data-section="${key}">${s.icon} ${s.label}</button>`).join("");
+    $$(".pill", toggle).forEach((b) => b.addEventListener("click", () => {
+      state.section = b.dataset.section;
+      state.cat = "all";
+      renderSection();
+      render();
+    }));
+  }
+
+  // Rebuilds the toggle + category pills for the current section and keeps
+  // the URL shareable (?section= + ?cat=) without reloading the page.
+  function renderSection() {
+    // A ?cat= link pointing outside the current section falls back to All
+    // instead of showing an empty grid.
+    if (state.cat !== "all" && sectionOf(state.cat) !== state.section) state.cat = "all";
+    renderToggle();
+    const catsInSection = [...new Set(products.filter((p) => sectionOf(p.category) === state.section).map((p) => p.category))];
+    pills.innerHTML = [`<button class="pill" data-cat="all">All</button>`,
+      ...catsInSection.map((k) => `<button class="pill" data-cat="${k}">${CATEGORIES[k]?.icon || "✨"} ${catLabel(k)}</button>`)
+    ].join("");
+    $$(".pill", pills).forEach((p) => p.addEventListener("click", () => {
+      state.cat = p.dataset.cat;
+      $$(".pill", pills).forEach((x) => x.classList.toggle("active", x === p));
+      render();
+    }));
+    const url = new URL(location);
+    url.searchParams.set("section", state.section);
+    if (state.cat === "all") url.searchParams.delete("cat"); else url.searchParams.set("cat", state.cat);
+    history.replaceState(null, "", url);
+  }
 
   const searchInput = $("#shop-search");
   searchInput.value = state.q;
@@ -269,7 +321,8 @@ async function initShop() {
 
   function render() {
     $$(".pill", pills).forEach((x) => x.classList.toggle("active", x.dataset.cat === state.cat));
-    let list = products.filter((p) =>
+    const sectionProducts = products.filter((p) => sectionOf(p.category) === state.section);
+    let list = sectionProducts.filter((p) =>
       (state.cat === "all" || p.category === state.cat) &&
       (!state.q || (p.name + " " + p.description).toLowerCase().includes(state.q.toLowerCase()))
     );
@@ -277,15 +330,21 @@ async function initShop() {
     else if (state.sort === "high") list.sort((a, b) => b.price - a.price);
     else if (state.sort === "az") list.sort((a, b) => a.name.localeCompare(b.name));
 
+    const sectionEmpty = sectionProducts.length === 0 && !state.q;
     $("#results-note").textContent = list.length
-      ? `Showing ${list.length} of ${products.length} products`
-      : "No products found — try a different search.";
+      ? `Showing ${list.length} of ${sectionProducts.length} products`
+      : (sectionEmpty && state.section === "babies"
+          ? "Baby essentials are on their way — check back soon!"
+          : "No products found — try a different search.");
     grid.innerHTML = list.length
       ? list.map((p) => productCard(p, true)).join("")
-      : `<div class="empty-state" style="grid-column:1/-1"><div class="big">🔍</div><h3>Nothing found</h3><p>Try searching for lipstick, serum, necklace…</p></div>`;
+      : (sectionEmpty && state.section === "babies"
+          ? `<div class="empty-state" style="grid-column:1/-1"><div class="big">🍼</div><h3>Baby collection coming soon</h3><p>Adorable baby essentials are on their way to Velvette. Message us on WhatsApp and we'll let you know the moment they land.</p><a class="btn" href="https://wa.me/${CONFIG.whatsappNumber}" target="_blank" rel="noopener">Notify Me on WhatsApp 💬</a></div>`
+          : `<div class="empty-state" style="grid-column:1/-1"><div class="big">🔍</div><h3>Nothing found</h3><p>Try searching for lipstick, serum, necklace…</p></div>`);
     bindAddButtons(grid);
     initTilt(grid);
   }
+  renderSection();
   render();
 }
 
