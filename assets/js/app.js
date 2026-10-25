@@ -123,6 +123,13 @@ function badgeHTML(p) {
   return `<span class="badge ${esc(p.badge)}">${esc(p.badge)}</span>`;
 }
 
+/* % OFF badge from oldPrice (struck-through "was" price hook) */
+function offBadgeHTML(p) {
+  if (!p.oldPrice || p.oldPrice <= p.price) return "";
+  const pct = Math.round((1 - p.price / p.oldPrice) * 100);
+  return `<span class="badge sale">${pct}% OFF</span>`;
+}
+
 function priceHTML(p) {
   return `<div class="pc-price">
     <span class="now">${fmtRs(p.price)}</span>
@@ -133,7 +140,7 @@ function priceHTML(p) {
 function productCard(p, tiltable = false) {
   return `
   <div class="product-card${tiltable ? " tiltable" : ""}">
-    ${badgeHTML(p)}${p.video ? `<span class="badge video">▶ Video</span>` : ""}
+    ${badgeHTML(p)}${offBadgeHTML(p)}${p.video ? `<span class="badge video">▶ Video</span>` : ""}
     <a href="product.html?id=${esc(p.id)}" class="pc-img"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></a>
     <div class="pc-body">
       <div class="pc-cat">${esc(catLabel(p.category))}</div>
@@ -200,7 +207,7 @@ function initHeroSlider(products) {
   slidesEl.innerHTML = products.map((p, i) => `
     <a href="product.html?id=${esc(p.id)}" class="hero-slide${i === 0 ? " active" : ""}" aria-label="${esc(p.name)}">
       <img src="${esc(p.image)}" alt="${esc(p.name)}">
-      <div class="hs-cap"><b>${esc(p.name)}</b><span>${fmtRs(p.price)}</span></div>
+      <div class="hs-cap"><b>${esc(p.name)}</b><span>${fmtRs(p.price)}${p.oldPrice ? ` <s>${fmtRs(p.oldPrice)}</s> · ${Math.round((1 - p.price / p.oldPrice) * 100)}% OFF` : ""}</span></div>
     </a>`).join("");
   dotsEl.innerHTML = products.map((_, i) => `<button data-slide="${i}" class="${i === 0 ? "active" : ""}" aria-label="Slide ${i + 1}"></button>`).join("");
   const slides = $$(".hero-slide", slidesEl);
