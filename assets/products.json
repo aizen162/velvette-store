@@ -14,7 +14,8 @@
       "assets/img/products/daisy-set-4.webp",
       "assets/img/products/daisy-set-5.webp",
       "assets/img/products/daisy-set-6.webp"
-    ]
+    ],
+    "oldPrice": 2665
   },
   {
     "id": "v26",
@@ -26,7 +27,8 @@
     "image": "assets/img/products/makeup-deal-2.webp",
     "images": [
       "assets/img/products/makeup-deal-2.webp"
-    ]
+    ],
+    "oldPrice": 1999
   },
   {
     "id": "v27",
@@ -38,7 +40,8 @@
     "image": "assets/img/products/pearl-set-1.webp",
     "images": [
       "assets/img/products/pearl-set-1.webp"
-    ]
+    ],
+    "oldPrice": 1749
   },
   {
     "id": "v28",
@@ -50,7 +53,8 @@
     "image": "assets/img/products/brush-set-1.webp",
     "images": [
       "assets/img/products/brush-set-1.webp"
-    ]
+    ],
+    "oldPrice": 832
   },
   {
     "id": "v29",
@@ -62,7 +66,8 @@
     "image": "assets/img/products/highlighter-1.webp",
     "images": [
       "assets/img/products/highlighter-1.webp"
-    ]
+    ],
+    "oldPrice": 922
   },
   {
     "id": "v30",
@@ -100,7 +105,8 @@
         "text": "very good product customer bhout Khush hova ha",
         "image": "assets/img/products/review-daniyal-01.jpg"
       }
-    ]
+    ],
+    "oldPrice": 1374
   },
   {
     "id": "v31",
@@ -130,6 +136,7 @@
         "rating": 5,
         "text": "good product same as shown in picture"
       }
-    ]
+    ],
+    "oldPrice": 998
   }
 ]
