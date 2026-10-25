@@ -204,6 +204,31 @@ header.site {
 }
 .search-box input:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(183,110,121,0.15); }
 .search-box::before { content: "🔍"; position: absolute; left: 16px; top: 12px; }
+
+/* ---------- navbar search ---------- */
+.nav-search { display: flex; align-items: center; background: #fff; border: 1.5px solid rgba(183,110,121,0.4); border-radius: 999px; padding: 2px 2px 2px 14px; }
+.nav-search input { border: none; outline: none; font-family: var(--font-body); font-size: 0.9rem; color: var(--plum); width: 150px; background: transparent; }
+.nav-search input::placeholder { color: var(--muted); }
+.nav-search button { width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--plum); color: #fff; cursor: pointer; font-size: 0.95rem; flex-shrink: 0; }
+.nav-search button:hover { background: var(--rose-dark); }
+.nav-search:focus-within { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(183,110,121,0.15); }
+
+/* ---------- hero search ---------- */
+.hero-search { display: flex; gap: 10px; margin-top: 18px; background: rgba(255,255,255,0.65); border: 1.5px solid rgba(212,175,55,0.5); border-radius: 999px; padding: 6px 6px 6px 20px; backdrop-filter: blur(6px); }
+.hero-search input { flex: 1; border: none; outline: none; background: transparent; font-family: var(--font-body); font-size: 0.98rem; color: var(--plum); min-width: 0; }
+.hero-search input::placeholder { color: var(--muted); }
+.hero-search .btn { padding: 12px 24px; white-space: nowrap; }
+
+/* ---------- product codes ---------- */
+.pc-code { font-size: 0.72rem; letter-spacing: 1.5px; color: var(--muted); margin: 2px 0 4px; }
+.pd-code { font-size: 0.9rem; color: var(--plum-soft); margin-bottom: 14px; }
+.pd-code b { color: var(--plum); letter-spacing: 1px; }
+
+@media (max-width: 900px) {
+  .nav-search input { display: none; }
+  .nav-search { border: none; background: transparent; padding: 0; }
+  .nav-search button { background: #fff; color: var(--plum); border: 1.5px solid rgba(183,110,121,0.4); }
+}
 .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
 .pill {
   border: 1.5px solid rgba(183,110,121,0.4); background: #fff; color: var(--plum);
