@@ -25,6 +25,11 @@ function fmtRs(n) {
   return "Rs " + Number(n).toLocaleString("en-PK");
 }
 
+/* Unique order number for WhatsApp orders (also the Velvette Rewards ref) */
+function newOrderNo() {
+  return "VLVT-" + Math.floor(100000 + Math.random() * 900000);
+}
+
 const CATEGORIES = {
   makeup: { label: "Makeup", icon: "💄" },
   skincare: { label: "Skincare", icon: "🧴" },
@@ -145,6 +150,7 @@ function productCard(p, tiltable = false) {
     <div class="pc-body">
       <div class="pc-cat">${esc(catLabel(p.category))}</div>
       <a href="product.html?id=${esc(p.id)}"><div class="pc-name">${esc(p.name)}</div></a>
+      <div class="pc-code">Code: ${esc(p.id.toUpperCase())}</div>
       <div class="pc-stars">★★★★★<span>4.8</span></div>
       ${priceHTML(p)}
       <button class="btn btn-sm pc-add" data-add="${esc(p.id)}">Add to Bag 🛍️</button>
@@ -328,10 +334,11 @@ async function initShop() {
 
   function render() {
     $$(".pill", pills).forEach((x) => x.classList.toggle("active", x.dataset.cat === state.cat));
-    const sectionProducts = products.filter((p) => sectionOf(p.category) === state.section);
+    // A search (name or product code) spans both sections, so codes work from anywhere
+    const sectionProducts = state.q ? products : products.filter((p) => sectionOf(p.category) === state.section);
     let list = sectionProducts.filter((p) =>
       (state.cat === "all" || p.category === state.cat) &&
-      (!state.q || (p.name + " " + p.description).toLowerCase().includes(state.q.toLowerCase()))
+      (!state.q || (p.name + " " + p.description + " " + p.id).toLowerCase().includes(state.q.toLowerCase()))
     );
     if (state.sort === "low") list.sort((a, b) => a.price - b.price);
     else if (state.sort === "high") list.sort((a, b) => b.price - a.price);
@@ -398,6 +405,7 @@ async function initProductPage() {
       <div class="pd-rating">★★★★★ <span style="color:var(--muted)">(4.8 · loved by customers)</span></div>
       <div class="pd-price"><span class="now">${fmtRs(p.price)}</span>${p.oldPrice ? `<span class="was">${fmtRs(p.oldPrice)}</span>` : ""}</div>
       ${p.oldPrice ? `<span class="pd-save">SAVE ${savePct}%</span>` : ""}
+      <div class="pd-code">Product Code: <b>${esc(p.id.toUpperCase())}</b></div>
       <p class="pd-desc">${esc(p.description)}</p>
       <div class="pd-meta">
         <div>🚚 <span>Delivery <b>all over Pakistan</b> — flat ${fmtRs(CONFIG.shippingFee)}, FREE over ${fmtRs(CONFIG.freeShippingOver)}</span></div>
@@ -458,7 +466,28 @@ async function initProductPage() {
   $("#pd-add").addEventListener("click", () => { Cart.add(p.id, qty); });
   $("#pd-buy").addEventListener("click", (e) => {
     e.preventDefault();
-    const msg = `💖 *I want to order from VELVETTE*\n\n${p.name} x${qty} — ${fmtRs(p.price * qty)}\n\nMy name:\nMy address:\nMy city:`;
+    const orderNo = newOrderNo();
+    const msg =
+`✨ *VELVETTE — New Order* ✨
+━━━━━━━━━━━━━━━━━━━━
+🧾 Order No: *${orderNo}*
+━━━━━━━━━━━━━━━━━━━━
+🛍️ *Your Item*
+1. ${p.name} (Code: ${p.id.toUpperCase()}) x${qty} — ${fmtRs(p.price * qty)}
+━━━━━━━━━━━━━━━━━━━━
+💰 *Bill*
+Item total: ${fmtRs(p.price * qty)}
+Delivery: ${fmtRs(CONFIG.shippingFee)} (FREE over ${fmtRs(CONFIG.freeShippingOver)})
+💵 Cash on Delivery
+━━━━━━━━━━━━━━━━━━━━
+👤 *My Details*
+Name:
+Phone:
+Address:
+City:
+━━━━━━━━━━━━━━━━━━━━
+💖 Thank you for shopping with Velvette! We will confirm your order shortly. Please keep your order number safe for tracking.
+🎁 Velvette Rewards: 5 orders = 1 FREE gift!`;
     window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
   });
 
@@ -534,16 +563,26 @@ async function initOffers() {
   $$("[data-bundle]", grid).forEach((btn) => btn.addEventListener("click", () => {
     const b = bundles[Number(btn.dataset.bundle)];
     const items = b.items.map(byId).filter(Boolean);
+    const orderNo = newOrderNo();
     const msg =
-`🎁 *VELVETTE BUNDLE OFFER*
-I want the *${b.name}* bundle:
-${b.qtyNote ? `- ${b.qtyNote}` : items.map((p) => `- ${p.name}`).join("\n")}
-
-Bundle price: ${fmtRs(b.price)}
-
-My name:
-My address:
-My city:`;
+`✨ *VELVETTE — New Order* ✨
+━━━━━━━━━━━━━━━━━━━━
+🧾 Order No: *${orderNo}*
+━━━━━━━━━━━━━━━━━━━━
+🎁 *Bundle: ${b.name}*
+${b.qtyNote ? `- ${b.qtyNote}` : items.map((p) => `- ${p.name} (Code: ${p.id.toUpperCase()})`).join("\n")}
+━━━━━━━━━━━━━━━━━━━━
+💰 *Bundle Price (Cash on Delivery): ${fmtRs(b.price)}*
+Delivery: ${fmtRs(CONFIG.shippingFee)} (FREE over ${fmtRs(CONFIG.freeShippingOver)})
+━━━━━━━━━━━━━━━━━━━━
+👤 *My Details*
+Name:
+Phone:
+Address:
+City:
+━━━━━━━━━━━━━━━━━━━━
+💖 Thank you for shopping with Velvette! We will confirm your order shortly. Please keep your order number safe for tracking.
+🎁 Velvette Rewards: 5 orders = 1 FREE gift!`;
     window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
     toast("Opening WhatsApp… 💬");
   }));
@@ -629,24 +668,31 @@ async function initCartPage() {
     $("#cart-checkout-form").addEventListener("submit", (e) => {
       e.preventDefault();
       const fd = new FormData(e.target);
-      const orderLines = lines.map((i, n) => `${n + 1}. ${i.p.name} x${i.qty} — ${fmtRs(i.p.price * i.qty)}`);
+      const orderNo = newOrderNo();
+      const orderLines = lines.map((i, n) => `${n + 1}. ${i.p.name} (Code: ${i.p.id.toUpperCase()}) x${i.qty} — ${fmtRs(i.p.price * i.qty)}`);
       const msg =
-`🛍️ *NEW ORDER — VELVETTE*
---------------------------
+`✨ *VELVETTE — New Order* ✨
+━━━━━━━━━━━━━━━━━━━━
+🧾 Order No: *${orderNo}*
+━━━━━━━━━━━━━━━━━━━━
+🛍️ *Your Items*
 ${orderLines.join("\n")}
---------------------------
+━━━━━━━━━━━━━━━━━━━━
+💰 *Bill*
 Subtotal: ${fmtRs(subtotal)}
-Delivery: ${shipping === 0 ? "FREE" : fmtRs(shipping)}
-*Total (COD): ${fmtRs(total)}*
-
-👤 Name: ${fd.get("name")}
-📞 Phone: ${fd.get("phone")}
-📍 Address: ${fd.get("address")}
-🏙️ City: ${fd.get("city")}
-
-🎁 Ask us for your *Velvette Rewards* order code after confirmation — 5 orders = 1 FREE gift!`;
+Delivery: ${shipping === 0 ? "FREE 🎉" : fmtRs(shipping)}
+*Total (Cash on Delivery): ${fmtRs(total)}*
+━━━━━━━━━━━━━━━━━━━━
+👤 *Delivery Details*
+Name: ${fd.get("name")}
+Phone: ${fd.get("phone")}
+Address: ${fd.get("address")}
+City: ${fd.get("city")}
+━━━━━━━━━━━━━━━━━━━━
+💖 Thank you for shopping with Velvette! We will confirm your order shortly. Please keep your order number safe for tracking.
+🎁 Velvette Rewards: 5 orders = 1 FREE gift!`;
       window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
-      toast("Opening WhatsApp… send the message to confirm ✅");
+      toast(`Order ${orderNo} — opening WhatsApp… send the message to confirm ✅`);
       Cart.clear();
       render();
     });
