@@ -63,5 +63,43 @@
     "images": [
       "assets/img/products/highlighter-1.webp"
     ]
+  },
+  {
+    "id": "v30",
+    "name": "French Tip Nails 144 Pcs Nude Shades Boxed",
+    "category": "makeup",
+    "price": 1099,
+    "badge": "new",
+    "description": "Premium French-style press-on nails — 144 pieces in assorted nude tones, durable ABS plastic with smooth, even coverage. Comes in a compartment storage box. Easy to apply for beginners and nail-art lovers — perfect for Eid, weddings, bridal, parties and daily wear. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/french-tip-nails-01.webp",
+    "images": [
+      "assets/img/products/french-tip-nails-01.webp",
+      "assets/img/products/french-tip-nails-02.webp",
+      "assets/img/products/french-tip-nails-03.webp",
+      "assets/img/products/french-tip-nails-04.webp",
+      "assets/img/products/french-tip-nails-05.webp",
+      "assets/img/products/french-tip-nails-06.webp"
+    ],
+    "video": "assets/img/products/french-tip-nails-video.mp4",
+    "reviews": [
+      {
+        "name": "Aliza",
+        "rating": 5,
+        "text": "best quality thi bus white nail 8 thay Happy customer assey he bayja karnie",
+        "image": "assets/img/products/review-aliza-01.jpg"
+      },
+      {
+        "name": "Daniyal",
+        "rating": 5,
+        "text": "bhout achi product hai price Kay hawalay say",
+        "image": "assets/img/products/review-daniyal-5star-01.jpg"
+      },
+      {
+        "name": "Daniyal",
+        "rating": 4,
+        "text": "very good product customer bhout Khush hova ha",
+        "image": "assets/img/products/review-daniyal-01.jpg"
+      }
+    ]
   }
 ]
