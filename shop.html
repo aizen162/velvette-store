@@ -23,7 +23,7 @@
       <a href="loyalty.html">Rewards</a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-icon" href="shop.html#search" aria-label="Search">🔍</a>
+      <form class="nav-search" action="shop.html#search" method="get" role="search"><input name="q" type="search" placeholder="Search name or code…" aria-label="Search products"><button type="submit" aria-label="Search">🔍</button></form>
       <a class="cart-btn" href="cart.html">🛍️ <span class="btn-label">Bag</span> <span class="cart-count">0</span></a>
       <button class="hamburger" aria-label="menu">☰</button>
     </div>
@@ -40,7 +40,7 @@
 <div class="container">
   <div class="section-toggle" id="section-toggle"></div>
   <div class="shop-toolbar">
-    <div class="search-box"><input id="shop-search" placeholder="Search lipstick, serum, necklace…" autocomplete="off"></div>
+    <div class="search-box"><input id="shop-search" placeholder="Search by name or product code — try V25…" autocomplete="off"></div>
     <div class="sort-box">
       <select id="shop-sort">
         <option value="featured">Sort: Featured</option>
