@@ -133,7 +133,7 @@ function priceHTML(p) {
 function productCard(p, tiltable = false) {
   return `
   <div class="product-card${tiltable ? " tiltable" : ""}">
-    ${badgeHTML(p)}
+    ${badgeHTML(p)}${p.video ? `<span class="badge video">▶ Video</span>` : ""}
     <a href="product.html?id=${esc(p.id)}" class="pc-img"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></a>
     <div class="pc-body">
       <div class="pc-cat">${esc(catLabel(p.category))}</div>
@@ -382,7 +382,8 @@ async function initProductPage() {
   <div class="pd-layout">
     <div class="pd-gallery">
       <img id="pd-main-img" src="${esc(p.image)}" alt="${esc(p.name)}">
-      ${(p.images && p.images.length > 1) ? `<div class="pd-thumbs">${p.images.map((src, i) => `<img src="${esc(src)}" data-full="${esc(src)}" class="${i === 0 ? "active" : ""}" alt="View ${i + 1}">`).join("")}</div>` : ""}
+      ${p.video ? `<video id="pd-main-video" controls preload="metadata" poster="${esc(p.image)}" src="${esc(p.video)}" style="display:none"></video>` : ""}
+      ${(p.video || (p.images && p.images.length > 1)) ? `<div class="pd-thumbs">${p.video ? `<button class="pd-thumb-video" data-video="1" aria-label="Play product video"><span class="pv-play">▶</span><span class="pv-label">Video</span></button>` : ""}${(p.images || []).map((src, i) => `<img src="${esc(src)}" data-full="${esc(src)}" class="${i === 0 ? "active" : ""}" alt="View ${i + 1}">`).join("")}</div>` : ""}
     </div>
     <div class="pd-info">
       <div class="pc-cat">${esc(catLabel(p.category))}</div>
@@ -408,19 +409,43 @@ async function initProductPage() {
       </div>
     </div>
   </div>
+  ${p.reviews && p.reviews.length ? `<div class="pd-reviews">
+    <div class="section-head"><div class="kicker">CUSTOMER LOVE</div><h2>What Buyers Say</h2></div>
+    <div class="review-list">
+      ${p.reviews.slice(0, 3).map((r) => `<div class="review">
+        ${r.image ? `<img class="review-img" src="${esc(r.image)}" alt="Customer review photo" loading="lazy">` : ""}
+        <div class="review-stars">${"★".repeat(r.rating || 5)}${"☆".repeat(5 - (r.rating || 5))}</div>
+        <p class="review-text">"${esc(r.text)}"</p>
+        <div class="review-name">— ${esc(r.name || "Verified buyer")}</div>
+      </div>`).join("")}
+    </div>
+  </div>` : ""}
   <div id="related-wrap" style="padding-bottom:50px">
     <div class="section-head"><div class="kicker">YOU MAY ALSO LOVE</div><h2>Related Beauties</h2></div>
     <div class="grid" id="related-grid"></div>
   </div>`;
 
   let qty = 1;
+  const mainImg = $("#pd-main-img");
+  const mainVideo = $("#pd-main-video");
+  const videoThumb = wrap.querySelector(".pd-thumb-video");
   const thumbs = wrap.querySelectorAll(".pd-thumbs img");
-  thumbs.forEach((t) => t.addEventListener("click", () => {
+  function clearThumbActive() {
     thumbs.forEach((x) => x.classList.remove("active"));
+    if (videoThumb) videoThumb.classList.remove("active");
+  }
+  thumbs.forEach((t) => t.addEventListener("click", () => {
+    clearThumbActive();
     t.classList.add("active");
-    const main = $("#pd-main-img");
-    if (main) main.src = t.dataset.full;
+    if (mainVideo) { mainVideo.pause(); mainVideo.style.display = "none"; }
+    if (mainImg) { mainImg.style.display = "block"; mainImg.src = t.dataset.full; }
   }));
+  if (videoThumb) videoThumb.addEventListener("click", () => {
+    clearThumbActive();
+    videoThumb.classList.add("active");
+    if (mainImg) mainImg.style.display = "none";
+    if (mainVideo) { mainVideo.style.display = "block"; mainVideo.play().catch(() => {}); }
+  });
   $("#q-inc").addEventListener("click", () => { qty = Math.min(10, qty + 1); $("#q-val").textContent = qty; });
   $("#q-dec").addEventListener("click", () => { qty = Math.max(1, qty - 1); $("#q-val").textContent = qty; });
   $("#pd-add").addEventListener("click", () => { Cart.add(p.id, qty); });
