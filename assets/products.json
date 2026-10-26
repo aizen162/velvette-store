@@ -7,7 +7,9 @@
     "image": "assets/img/products/daisy-set-1.webp",
     "images": [
       "assets/img/products/daisy-set-1.webp",
+      "assets/img/products/daisy-set-ai-model-1.webp",
       "assets/img/products/daisy-set-2.webp",
+      "assets/img/products/daisy-set-ai-model-2.webp",
       "assets/img/products/daisy-set-3.webp",
       "assets/img/products/daisy-set-4.webp",
       "assets/img/products/daisy-set-5.webp",
@@ -24,7 +26,9 @@
     "id": "v26",
     "image": "assets/img/products/makeup-deal-2.webp",
     "images": [
-      "assets/img/products/makeup-deal-2.webp"
+      "assets/img/products/makeup-deal-2.webp",
+      "assets/img/products/makeup-deal-ai-model-1.webp",
+      "assets/img/products/makeup-deal-ai-model-2.webp"
     ],
     "name": "2 in 1 Makeup Deal — Primer + Foundation + Beauty Blender",
     "oldPrice": 2137,
@@ -37,7 +41,9 @@
     "id": "v27",
     "image": "assets/img/products/pearl-set-1.webp",
     "images": [
-      "assets/img/products/pearl-set-1.webp"
+      "assets/img/products/pearl-set-1.webp",
+      "assets/img/products/pearl-set-ai-model-1.webp",
+      "assets/img/products/pearl-set-ai-model-2.webp"
     ],
     "name": "White Pearl Necklace & Earrings Set",
     "oldPrice": 1861,
@@ -50,7 +56,9 @@
     "id": "v28",
     "image": "assets/img/products/brush-set-1.webp",
     "images": [
-      "assets/img/products/brush-set-1.webp"
+      "assets/img/products/brush-set-1.webp",
+      "assets/img/products/brush-set-ai-model-1.webp",
+      "assets/img/products/brush-set-ai-model-2.webp"
     ],
     "name": "Rose Gold Makeup Brush Set",
     "oldPrice": 982,
@@ -63,7 +71,9 @@
     "id": "v29",
     "image": "assets/img/products/highlighter-1.webp",
     "images": [
-      "assets/img/products/highlighter-1.webp"
+      "assets/img/products/highlighter-1.webp",
+      "assets/img/products/highlighter-ai-model-1.webp",
+      "assets/img/products/highlighter-ai-model-2.webp"
     ],
     "name": "Liquid Highlighter",
     "oldPrice": 1060,
@@ -77,7 +87,9 @@
     "image": "assets/img/products/french-tip-nails-01.webp",
     "images": [
       "assets/img/products/french-tip-nails-01.webp",
+      "assets/img/products/french-tip-nails-ai-model-1.webp",
       "assets/img/products/french-tip-nails-02.webp",
+      "assets/img/products/french-tip-nails-ai-model-2.webp",
       "assets/img/products/french-tip-nails-03.webp",
       "assets/img/products/french-tip-nails-04.webp",
       "assets/img/products/french-tip-nails-05.webp",
@@ -115,7 +127,9 @@
     "id": "v31",
     "image": "assets/img/products/baby-fruit-feeder-01.jpg",
     "images": [
-      "assets/img/products/baby-fruit-feeder-01.jpg"
+      "assets/img/products/baby-fruit-feeder-01.jpg",
+      "assets/img/products/baby-fruit-feeder-ai-model-1.webp",
+      "assets/img/products/baby-fruit-feeder-ai-model-2.webp"
     ],
     "name": "Blue Star Baby Fruit Feeder BPA-Free Silicone",
     "oldPrice": 1148,
@@ -144,7 +158,9 @@
     "image": "assets/img/products/eyebrow-trimmer-01.webp",
     "images": [
       "assets/img/products/eyebrow-trimmer-01.webp",
+      "assets/img/products/eyebrow-trimmer-ai-model-1.webp",
       "assets/img/products/eyebrow-trimmer-02.webp",
+      "assets/img/products/eyebrow-trimmer-ai-model-2.webp",
       "assets/img/products/eyebrow-trimmer-03.webp",
       "assets/img/products/eyebrow-trimmer-04.webp"
     ],
