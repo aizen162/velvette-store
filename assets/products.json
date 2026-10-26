@@ -1,1 +1,165 @@
-[{"badge":"bestseller","category":"necklaces","description":"A dreamy 3-piece daisy set — delicate branch-pendant necklace, blooming flower ring and matching earrings in gold-plated brass with purple gemstone accents. Tarnish-resistant, made for daily wear, and arrives in a luxurious red velvet box. Perfect for weddings, festive looks or gifting.","id":"v25","image":"assets/img/products/daisy-set-1.webp","images":["assets/img/products/daisy-set-1.webp","assets/img/products/daisy-set-2.webp","assets/img/products/daisy-set-3.webp","assets/img/products/daisy-set-4.webp","assets/img/products/daisy-set-5.webp","assets/img/products/daisy-set-6.webp"],"name":"Gold-Plated Daisy Jewelry Set","oldPrice":2815,"price":1689},{"badge":"new","category":"makeup","description":"Your full base routine in one deal — Flicka Silk Touch moisturizer & primer for smooth, hydrated skin, Miss Rôse foundation for natural flawless coverage (all shades available), plus a FREE beauty blender for perfect blending. Cash on delivery, 7-day returns.","id":"v26","image":"assets/img/products/makeup-deal-2.webp","images":["assets/img/products/makeup-deal-2.webp"],"name":"2 in 1 Makeup Deal — Primer + Foundation + Beauty Blender","oldPrice":2137,"price":1389},{"badge":"new","category":"necklaces","description":"Timeless elegance — a classic white pearl set with a single-strand necklace, matching bracelet and single-pearl drop earrings with gold hooks. Perfect for weddings, festive looks or gifting. Cash on delivery, 7-day returns.","id":"v27","image":"assets/img/products/pearl-set-1.webp","images":["assets/img/products/pearl-set-1.webp"],"name":"White Pearl Necklace & Earrings Set","oldPrice":1861,"price":1489},{"badge":"new","category":"makeup","description":"8-piece rose-gold brush set — powder, foundation, blush, eyeshadow, blending and spoolie brushes with soft bristles and rose-gold ferrules. Stylish, travel-friendly, made for daily glam. Cash on delivery, 7-day returns.","id":"v28","image":"assets/img/products/brush-set-1.webp","images":["assets/img/products/brush-set-1.webp"],"name":"Rose Gold Makeup Brush Set","oldPrice":982,"price":589},{"badge":"new","category":"makeup","description":"Liquid illuminator drops for a lit-from-within glow — blend on cheekbones, brow bone and nose, or mix with foundation. Lightweight, long-lasting shine for bridal and everyday looks. Cash on delivery, 7-day returns.","id":"v29","image":"assets/img/products/highlighter-1.webp","images":["assets/img/products/highlighter-1.webp"],"name":"Liquid Highlighter","oldPrice":1060,"price":689},{"badge":"new","category":"makeup","description":"Premium French-style press-on nails — 144 pieces in assorted nude tones, durable ABS plastic with smooth, even coverage. Comes in a compartment storage box. Easy to apply for beginners and nail-art lovers — perfect for Eid, weddings, bridal, parties and daily wear. Cash on delivery, 7-day returns.","id":"v30","image":"assets/img/products/french-tip-nails-01.webp","images":["assets/img/products/french-tip-nails-01.webp","assets/img/products/french-tip-nails-02.webp","assets/img/products/french-tip-nails-03.webp","assets/img/products/french-tip-nails-04.webp","assets/img/products/french-tip-nails-05.webp","assets/img/products/french-tip-nails-06.webp"],"name":"French Tip Nails 144 Pcs Nude Shades Boxed","oldPrice":1486,"price":1189,"reviews":[{"image":"assets/img/products/review-aliza-01.jpg","name":"Aliza","rating":5,"text":"Really good quality, only the white nails were 8 in the box. Happy with it, keep it up like this."},{"image":"assets/img/products/review-daniyal-5star-01.jpg","name":"Daniyal","rating":5,"text":"Bohat achi product hai, especially is price mein."},{"image":"assets/img/products/review-daniyal-01.jpg","name":"Daniyal","rating":4,"text":"Very good product, I'm really happy with it."}],"video":"assets/img/products/french-tip-nails-video.mp4"},{"badge":"new","category":"babies","description":"BPA-free silicone baby fruit feeder with a blue star-grip handle and transparent feeding chamber — gentle on gums, wide opening to prevent choking, secure latch to prevent spills. Dishwasher safe and sterilizable with boiling water. A safe way to introduce fruits and vegetables to your baby. Cash on delivery, 7-day returns.","id":"v31","image":"assets/img/products/baby-fruit-feeder-01.jpg","images":["assets/img/products/baby-fruit-feeder-01.jpg"],"name":"Blue Star Baby Fruit Feeder BPA-Free Silicone","oldPrice":1148,"price":689,"reviews":[{"image":"assets/img/products/review-feeder-01.jpg","name":"Verified buyer","rating":5,"text":"Bohat pasand ai, bus price thori kam hoti to aur acha hota."},{"name":"Verified buyer","rating":5,"text":"Mashallah, quality bohat achi thi. Delivery thori late thi, lekin quality ne cover kar diya."}]}]
+[
+  {
+    "badge": "bestseller",
+    "category": "necklaces",
+    "description": "A dreamy 3-piece daisy set — delicate branch-pendant necklace, blooming flower ring and matching earrings in gold-plated brass with purple gemstone accents. Tarnish-resistant, made for daily wear, and arrives in a luxurious red velvet box. Perfect for weddings, festive looks or gifting.",
+    "id": "v25",
+    "image": "assets/img/products/daisy-set-1.webp",
+    "images": [
+      "assets/img/products/daisy-set-1.webp",
+      "assets/img/products/daisy-set-2.webp",
+      "assets/img/products/daisy-set-3.webp",
+      "assets/img/products/daisy-set-4.webp",
+      "assets/img/products/daisy-set-5.webp",
+      "assets/img/products/daisy-set-6.webp"
+    ],
+    "name": "Gold-Plated Daisy Jewelry Set",
+    "oldPrice": 2815,
+    "price": 1689
+  },
+  {
+    "badge": "new",
+    "category": "makeup",
+    "description": "Your full base routine in one deal — Flicka Silk Touch moisturizer & primer for smooth, hydrated skin, Miss Rôse foundation for natural flawless coverage (all shades available), plus a FREE beauty blender for perfect blending. Cash on delivery, 7-day returns.",
+    "id": "v26",
+    "image": "assets/img/products/makeup-deal-2.webp",
+    "images": [
+      "assets/img/products/makeup-deal-2.webp"
+    ],
+    "name": "2 in 1 Makeup Deal — Primer + Foundation + Beauty Blender",
+    "oldPrice": 2137,
+    "price": 1389
+  },
+  {
+    "badge": "new",
+    "category": "necklaces",
+    "description": "Timeless elegance — a classic white pearl set with a single-strand necklace, matching bracelet and single-pearl drop earrings with gold hooks. Perfect for weddings, festive looks or gifting. Cash on delivery, 7-day returns.",
+    "id": "v27",
+    "image": "assets/img/products/pearl-set-1.webp",
+    "images": [
+      "assets/img/products/pearl-set-1.webp"
+    ],
+    "name": "White Pearl Necklace & Earrings Set",
+    "oldPrice": 1861,
+    "price": 1489
+  },
+  {
+    "badge": "new",
+    "category": "makeup",
+    "description": "8-piece rose-gold brush set — powder, foundation, blush, eyeshadow, blending and spoolie brushes with soft bristles and rose-gold ferrules. Stylish, travel-friendly, made for daily glam. Cash on delivery, 7-day returns.",
+    "id": "v28",
+    "image": "assets/img/products/brush-set-1.webp",
+    "images": [
+      "assets/img/products/brush-set-1.webp"
+    ],
+    "name": "Rose Gold Makeup Brush Set",
+    "oldPrice": 982,
+    "price": 589
+  },
+  {
+    "badge": "new",
+    "category": "makeup",
+    "description": "Liquid illuminator drops for a lit-from-within glow — blend on cheekbones, brow bone and nose, or mix with foundation. Lightweight, long-lasting shine for bridal and everyday looks. Cash on delivery, 7-day returns.",
+    "id": "v29",
+    "image": "assets/img/products/highlighter-1.webp",
+    "images": [
+      "assets/img/products/highlighter-1.webp"
+    ],
+    "name": "Liquid Highlighter",
+    "oldPrice": 1060,
+    "price": 689
+  },
+  {
+    "badge": "new",
+    "category": "makeup",
+    "description": "Premium French-style press-on nails — 144 pieces in assorted nude tones, durable ABS plastic with smooth, even coverage. Comes in a compartment storage box. Easy to apply for beginners and nail-art lovers — perfect for Eid, weddings, bridal, parties and daily wear. Cash on delivery, 7-day returns.",
+    "id": "v30",
+    "image": "assets/img/products/french-tip-nails-01.webp",
+    "images": [
+      "assets/img/products/french-tip-nails-01.webp",
+      "assets/img/products/french-tip-nails-02.webp",
+      "assets/img/products/french-tip-nails-03.webp",
+      "assets/img/products/french-tip-nails-04.webp",
+      "assets/img/products/french-tip-nails-05.webp",
+      "assets/img/products/french-tip-nails-06.webp"
+    ],
+    "name": "French Tip Nails 144 Pcs Nude Shades Boxed",
+    "oldPrice": 1486,
+    "price": 1189,
+    "reviews": [
+      {
+        "image": "assets/img/products/review-aliza-01.jpg",
+        "name": "Aliza",
+        "rating": 5,
+        "text": "Really good quality, only the white nails were 8 in the box. Happy with it, keep it up like this."
+      },
+      {
+        "image": "assets/img/products/review-daniyal-5star-01.jpg",
+        "name": "Daniyal",
+        "rating": 5,
+        "text": "Bohat achi product hai, especially is price mein."
+      },
+      {
+        "image": "assets/img/products/review-daniyal-01.jpg",
+        "name": "Daniyal",
+        "rating": 4,
+        "text": "Very good product, I'm really happy with it."
+      }
+    ],
+    "video": "assets/img/products/french-tip-nails-video.mp4"
+  },
+  {
+    "badge": "new",
+    "category": "babies",
+    "description": "BPA-free silicone baby fruit feeder with a blue star-grip handle and transparent feeding chamber — gentle on gums, wide opening to prevent choking, secure latch to prevent spills. Dishwasher safe and sterilizable with boiling water. A safe way to introduce fruits and vegetables to your baby. Cash on delivery, 7-day returns.",
+    "id": "v31",
+    "image": "assets/img/products/baby-fruit-feeder-01.jpg",
+    "images": [
+      "assets/img/products/baby-fruit-feeder-01.jpg"
+    ],
+    "name": "Blue Star Baby Fruit Feeder BPA-Free Silicone",
+    "oldPrice": 1148,
+    "price": 689,
+    "reviews": [
+      {
+        "image": "assets/img/products/review-feeder-01.jpg",
+        "name": "Verified buyer",
+        "rating": 5,
+        "text": "Bohat pasand ai, bus price thori kam hoti to aur acha hota."
+      },
+      {
+        "name": "Verified buyer",
+        "rating": 5,
+        "text": "Mashallah, quality bohat achi thi. Delivery thori late thi, lekin quality ne cover kar diya."
+      }
+    ]
+  },
+  {
+    "id": "v32",
+    "name": "Rechargeable Eyebrow Trimmer with Box Packaging",
+    "category": "makeup",
+    "price": 1589,
+    "badge": "new",
+    "description": "Rechargeable eyebrow trimmer for easy personal grooming — ergonomic design with a comfortable grip for precise brow shaping. Comes with cleaning brushes, a charging wire and box packaging. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/eyebrow-trimmer-01.webp",
+    "images": [
+      "assets/img/products/eyebrow-trimmer-01.webp",
+      "assets/img/products/eyebrow-trimmer-02.webp",
+      "assets/img/products/eyebrow-trimmer-03.webp",
+      "assets/img/products/eyebrow-trimmer-04.webp"
+    ],
+    "reviews": [
+      {
+        "name": "Verified buyer",
+        "rating": 5,
+        "text": "Product expected se bhi zyada acha nikla, I'm really happy with it."
+      },
+      {
+        "name": "Verified buyer",
+        "rating": 5,
+        "text": "Quality zabardast hai, I'm very happy with this trimmer."
+      }
+    ],
+    "oldPrice": 2445
+  }
+]
