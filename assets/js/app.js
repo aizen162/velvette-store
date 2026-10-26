@@ -6,7 +6,7 @@
 const CONFIG = {
   storeName: "Velvette",
   whatsappNumber: "923335017388",
-  shippingFee: 180,
+  shippingFee: 90,
   freeShippingOver: 2500,
   // Launch offer deadline (PKT). Change here and it updates everywhere.
   launchDeadline: "2026-10-31T23:59:59+05:00",
