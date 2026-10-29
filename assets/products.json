@@ -213,5 +213,20 @@
       }
     ],
     "oldPrice": 1698
+  },
+  {
+    "id": "v35",
+    "name": "Liquid Blush Pack of 3",
+    "category": "makeup",
+    "price": 1489,
+    "badge": "new",
+    "description": "Liquid blush pack of 3 — 15ml tubes in natural-color shades for a soft, natural flush on the cheeks. Lightweight liquid formula that blends easily. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/liquid-blush-01.webp",
+    "images": [
+      "assets/img/products/liquid-blush-01.webp",
+      "assets/img/products/liquid-blush-02.webp",
+      "assets/img/products/liquid-blush-03.webp"
+    ],
+    "oldPrice": 1861
   }
 ]
