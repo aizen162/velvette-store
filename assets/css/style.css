@@ -622,7 +622,7 @@ footer.site { background: var(--plum); color: #f3dfe6; margin-top: 20px; }
 
 /* ---------- lipstick cursor + sparkle trail (fine pointers only) ---------- */
 @media (hover: hover) and (pointer: fine) {
-  body, body * { cursor: url("../img/lipstick-cursor.png") 26 11, auto !important; }
+  body, body * { cursor: url("../img/lipstick-cursor.png") 16 13, auto !important; }
   input, textarea, [contenteditable="true"] { cursor: text !important; }
 }
 .velvette-sparkle {
