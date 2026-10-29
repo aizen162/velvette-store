@@ -177,5 +177,41 @@
       }
     ],
     "oldPrice": 2445
+  },
+  {
+    "id": "v33",
+    "name": "Moon Touch Lip & Cheek Tint 20ml",
+    "category": "makeup",
+    "price": 1019,
+    "badge": "new",
+    "description": "Moon Touch Lip & Cheek Tint — a dual-use liquid tint for lips and cheeks in a 20ml glass bottle with a gold dropper cap. Pink shade with a nourishing natural-pigment formula, plus a free mini tint (shade may vary). Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/moon-touch-tint-01.webp",
+    "images": [
+      "assets/img/products/moon-touch-tint-01.webp",
+      "assets/img/products/moon-touch-tint-02.webp"
+    ],
+    "oldPrice": 1568
+  },
+  {
+    "id": "v34",
+    "name": "Jade Roller & Gua Sha Set",
+    "category": "makeup",
+    "price": 1019,
+    "badge": "new",
+    "description": "Natural green jade facial roller with gold-tone fittings plus a heart-shaped gua sha stone — a cooling duo for your daily facial massage ritual, for face, eyes and body. Cash on delivery, 7-day returns.",
+    "image": "assets/img/products/gua-sha-set-01.webp",
+    "images": [
+      "assets/img/products/gua-sha-set-01.webp",
+      "assets/img/products/gua-sha-set-02.webp",
+      "assets/img/products/gua-sha-set-03.webp"
+    ],
+    "reviews": [
+      {
+        "name": "Milly",
+        "rating": 5,
+        "text": "Exactly as shown — I'm happy with it."
+      }
+    ],
+    "oldPrice": 1698
   }
 ]
