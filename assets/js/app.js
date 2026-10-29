@@ -713,3 +713,28 @@ document.addEventListener("DOMContentLoaded", () => {
   initCountdown();
   initCartPage();
 });
+
+/* ---------------- lipstick sparkle trail ---------------- */
+(function initLipstickTrail() {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const GLYPHS = ["✦", "✧", "✦", "•"];
+  const COLORS = ["#e05575", "#d4af37", "#f4a7bb", "#b76e79"];
+  let last = 0;
+  document.addEventListener("mousemove", (e) => {
+    const now = performance.now();
+    if (now - last < 60) return;
+    last = now;
+    const s = document.createElement("span");
+    s.className = "velvette-sparkle";
+    s.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+    const size = 8 + Math.random() * 8;
+    s.style.left = e.clientX + (Math.random() * 14 - 7) + "px";
+    s.style.top = e.clientY + (Math.random() * 10 - 2) + "px";
+    s.style.fontSize = size + "px";
+    s.style.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    document.body.appendChild(s);
+    s.addEventListener("animationend", () => s.remove());
+    setTimeout(() => s.remove(), 1000);
+  }, { passive: true });
+})();
