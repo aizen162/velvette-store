@@ -295,7 +295,7 @@ async function initShop() {
   function renderToggle() {
     if (!toggle) return;
     toggle.innerHTML = Object.entries(SECTIONS).map(([key, s]) =>
-      `<button class="pill${state.section === key ? " active" : ""}" data-section="${key}">${s.icon} ${s.label}</button>`).join("");
+      `<button class="pill${state.section === key ? " active" : ""}" data-section="${key}">${s.label}</button>`).join("");
     $$(".pill", toggle).forEach((b) => b.addEventListener("click", () => {
       state.section = b.dataset.section;
       state.cat = "all";
