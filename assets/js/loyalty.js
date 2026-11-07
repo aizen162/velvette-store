@@ -109,7 +109,7 @@ function validateAll(inputs) {
   });
 
   if (codes.length === LOYALTY_NEEDED) {
-    status.textContent = "🎉 All 5 codes accepted — pick your FREE gift below!";
+    status.textContent = "All 5 codes accepted — pick your FREE gift below!";
     status.className = "code-status ok";
     unlockedCodes = codes;
     showGiftPicker();
@@ -130,7 +130,7 @@ function showGiftPicker() {
       <img src="${p.image}" alt="${p.name}" loading="lazy">
       <div class="g-body">
         <div class="g-name">${p.name}</div>
-        <div class="g-price"><s>Rs ${p.price.toLocaleString("en-PK")}</s><span class="g-free">FREE 🎁</span></div>
+        <div class="g-price"><s>Rs ${p.price.toLocaleString("en-PK")}</s><span class="g-free">FREE</span></div>
       </div>
     </div>`).join("");
   [...grid.querySelectorAll(".gift-card")].forEach((card) => {
@@ -146,28 +146,28 @@ function showGiftPicker() {
 
 function claimFormHTML() {
   return `
-    <h3 class="serif" style="margin-bottom:6px">Claim Your Free Gift 🎁</h3>
+    <h3 class="serif" style="margin-bottom:6px">Claim Your Free Gift</h3>
     <p style="color:var(--plum-soft);font-size:.92rem;margin-bottom:18px">Tell us where to send it — delivery is on us!</p>
     <div class="checkout-form" style="max-width:440px;margin:0 auto;text-align:left">
       <div class="field"><input id="claim-name" placeholder="Full Name *"></div>
       <div class="field"><input id="claim-phone" placeholder="Phone / WhatsApp *"></div>
       <div class="field"><input id="claim-address" placeholder="House, street, area *"></div>
       <div class="field"><input id="claim-city" placeholder="City *"></div>
-      <button class="btn btn-gold btn-block" id="claim-btn" style="margin-top:6px">🎁 Claim Free Gift on WhatsApp</button>
+      <button class="btn btn-gold btn-block" id="claim-btn" style="margin-top:6px">Claim Free Gift on WhatsApp</button>
       <p class="form-note">Your 5 codes will be marked as used after claiming.</p>
     </div>`;
 }
 
 async function claimGift() {
   if (!selectedGift || unlockedCodes.length !== LOYALTY_NEEDED) {
-    toast("Pick your gift first 💝");
+    toast("Pick your gift first");
     return;
   }
   const name = $("#claim-name").value.trim();
   const phone = $("#claim-phone").value.trim();
   const address = $("#claim-address").value.trim();
   const city = $("#claim-city").value.trim();
-  if (!name || !phone || !address || !city) { toast("Please fill in all delivery details 📝"); return; }
+  if (!name || !phone || !address || !city) { toast("Please fill in all delivery details"); return; }
 
   const msg =
 `🎁 *VELVETTE REWARDS — FREE GIFT CLAIM*
@@ -184,7 +184,7 @@ ${unlockedCodes.map((c, i) => `${i + 1}. ${c}`).join("\n")}
 🏙️ City: ${city}`;
   window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
   loyaltyMarkUsed(unlockedCodes);
-  toast("Opening WhatsApp… your codes are now used ✅");
+  toast("Opening WhatsApp… your codes are now used");
 }
 
 document.addEventListener("DOMContentLoaded", initLoyaltyPage);
