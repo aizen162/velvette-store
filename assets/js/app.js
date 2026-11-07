@@ -31,20 +31,20 @@ function newOrderNo() {
 }
 
 const CATEGORIES = {
-  makeup: { label: "Makeup", icon: "💄" },
-  skincare: { label: "Skincare", icon: "🧴" },
-  necklaces: { label: "Necklaces & Chains", icon: "💎" },
-  bracelets: { label: "Bracelets", icon: "📿" },
-  accessories: { label: "Accessories", icon: "👜" },
-  babies: { label: "Babies", icon: "🍼" },
+  makeup: { label: "Makeup" },
+  skincare: { label: "Skincare" },
+  necklaces: { label: "Necklaces & Chains" },
+  bracelets: { label: "Bracelets" },
+  accessories: { label: "Accessories" },
+  babies: { label: "Babies" },
 };
 
 /* Shop sections: two top-level tabs. A product's section comes from its
    category; unknown categories default to beauty. Add future baby
    sub-categories to the babies list and they land in the Babies tab. */
 const SECTIONS = {
-  beauty: { label: "Cosmetics & Makeup", icon: "💄", cats: ["makeup", "skincare", "necklaces", "bracelets", "accessories"] },
-  babies: { label: "Babies", icon: "🍼", cats: ["babies"] },
+  beauty: { label: "Cosmetics & Makeup", cats: ["makeup", "skincare", "necklaces", "bracelets", "accessories"] },
+  babies: { label: "Babies", cats: ["babies"] },
 };
 
 function sectionOf(cat) {
@@ -82,7 +82,7 @@ const Cart = {
     const line = items.find((i) => i.id === id);
     if (line) line.qty += qty; else items.push({ id, qty });
     this.save(items);
-    toast("Added to bag 🛍️");
+    toast("✓ Added to bag");
   },
   setQty(id, qty) {
     let items = this.items();
@@ -153,7 +153,7 @@ function productCard(p, tiltable = false) {
       <div class="pc-code">Code: ${esc(p.id.toUpperCase())}</div>
       <div class="pc-stars">★★★★★<span>4.8</span></div>
       ${priceHTML(p)}
-      <button class="btn btn-sm pc-add" data-add="${esc(p.id)}">Add to Bag 🛍️</button>
+      <button class="btn btn-sm pc-add" data-add="${esc(p.id)}">Add to Bag</button>
     </div>
   </div>`;
 }
@@ -187,15 +187,15 @@ async function initHome() {
     // section is discoverable; hidden automatically once real baby
     // products appear in the catalog (they get their own tile above).
     const babiesTeaser = cats.includes("babies") ? "" :
-      `<a class="cat-tile" href="shop.html?section=babies"><div class="icon">🍼</div><h3>Babies</h3><small>Coming soon</small></a>`;
+      `<a class="cat-tile" href="shop.html?section=babies"><h3>Babies</h3><small>Coming soon</small></a>`;
     catGrid.innerHTML = cats.map((c) => `
-      <a class="cat-tile" href="shop.html?cat=${esc(c)}"><div class="icon">${CATEGORIES[c]?.icon || "✨"}</div><h3>${esc(catLabel(c))}</h3><small>${counts[c]} product${counts[c] > 1 ? "s" : ""}</small></a>`).join("") + babiesTeaser;
+      <a class="cat-tile" href="shop.html?cat=${esc(c)}"><h3>${esc(catLabel(c))}</h3><small>${counts[c]} product${counts[c] > 1 ? "s" : ""}</small></a>`).join("") + babiesTeaser;
   }
   const homePills = $("#home-pills");
   if (homePills) {
-    const babiesPill = cats.includes("babies") ? "" : `<a class="pill" href="shop.html?section=babies">🍼 Babies</a>`;
+    const babiesPill = cats.includes("babies") ? "" : `<a class="pill" href="shop.html?section=babies">Babies</a>`;
     homePills.innerHTML = [`<a class="pill active" href="shop.html">All</a>`,
-      ...cats.map((c) => `<a class="pill" href="shop.html?cat=${esc(c)}">${CATEGORIES[c]?.icon || "✨"} ${esc(catLabel(c))}</a>`),
+      ...cats.map((c) => `<a class="pill" href="shop.html?cat=${esc(c)}">${esc(catLabel(c))}</a>`),
       babiesPill
     ].join("");
   }
@@ -313,7 +313,7 @@ async function initShop() {
     renderToggle();
     const catsInSection = [...new Set(products.filter((p) => sectionOf(p.category) === state.section).map((p) => p.category))];
     pills.innerHTML = [`<button class="pill" data-cat="all">All</button>`,
-      ...catsInSection.map((k) => `<button class="pill" data-cat="${k}">${CATEGORIES[k]?.icon || "✨"} ${catLabel(k)}</button>`)
+      ...catsInSection.map((k) => `<button class="pill" data-cat="${k}">${catLabel(k)}</button>`)
     ].join("");
     $$(".pill", pills).forEach((p) => p.addEventListener("click", () => {
       state.cat = p.dataset.cat;
@@ -353,8 +353,8 @@ async function initShop() {
     grid.innerHTML = list.length
       ? list.map((p) => productCard(p, true)).join("")
       : (sectionEmpty && state.section === "babies"
-          ? `<div class="empty-state" style="grid-column:1/-1"><div class="big">🍼</div><h3>Baby collection coming soon</h3><p>Adorable baby essentials are on their way to Velvette. Message us on WhatsApp and we'll let you know the moment they land.</p><a class="btn" href="https://wa.me/${CONFIG.whatsappNumber}" target="_blank" rel="noopener">Notify Me on WhatsApp 💬</a></div>`
-          : `<div class="empty-state" style="grid-column:1/-1"><div class="big">🔍</div><h3>Nothing found</h3><p>Try searching for lipstick, serum, necklace…</p></div>`);
+          ? `<div class="empty-state" style="grid-column:1/-1"><h3>Baby collection coming soon</h3><p>Adorable baby essentials are on their way to Velvette. Message us on WhatsApp and we'll let you know the moment they land.</p><a class="btn" href="https://wa.me/${CONFIG.whatsappNumber}" target="_blank" rel="noopener">Notify Me on WhatsApp</a></div>`
+          : `<div class="empty-state" style="grid-column:1/-1"><h3>Nothing found</h3><p>Try searching for lipstick, serum, necklace…</p></div>`);
     bindAddButtons(grid);
     initTilt(grid);
   }
@@ -386,7 +386,7 @@ async function initProductPage() {
   const p = products.find((x) => x.id === id);
 
   if (!p) {
-    wrap.innerHTML = `<div class="empty-state"><div class="big">💔</div><h2>Product not found</h2><p style="margin:10px 0 24px">This beauty may have sold out or moved.</p><a class="btn" href="shop.html">Back to Shop</a></div>`;
+    wrap.innerHTML = `<div class="empty-state"><h2>Product not found</h2><p style="margin:10px 0 24px">This beauty may have sold out or moved.</p><a class="btn" href="shop.html">Back to Shop</a></div>`;
     return;
   }
   document.title = `${p.name} — Velvette`;
@@ -408,19 +408,19 @@ async function initProductPage() {
       <div class="pd-code">Product Code: <b>${esc(p.id.toUpperCase())}</b></div>
       <p class="pd-desc">${esc(p.description)}</p>
       <div class="pd-meta">
-        <div>🚚 <span>Delivery <b>all over Pakistan</b> — flat ${fmtRs(CONFIG.shippingFee)}, FREE over ${fmtRs(CONFIG.freeShippingOver)}</span></div>
-        <div>💵 <span><b>Cash on Delivery</b> available</span></div>
-        <div>🎁 <span>Eligible for <a href="loyalty.html" style="color:var(--rose);font-weight:600">Velvette Rewards</a> — 5 orders = 1 free gift</span></div>
+        <div><span>Delivery <b>all over Pakistan</b> — flat ${fmtRs(CONFIG.shippingFee)}, FREE over ${fmtRs(CONFIG.freeShippingOver)}</span></div>
+        <div><span><b>Cash on Delivery</b> available</span></div>
+        <div><span>Eligible for <a href="loyalty.html" style="color:var(--rose);font-weight:600">Velvette Rewards</a> — 5 orders = 1 free gift</span></div>
       </div>
       <div class="qty-row">
         <div class="qty"><button id="q-dec">−</button><span id="q-val">1</span><button id="q-inc">+</button></div>
-        <button class="btn" id="pd-add" style="flex:1;min-width:200px">Add to Bag 🛍️</button>
+        <button class="btn" id="pd-add" style="flex:1;min-width:200px">Add to Bag</button>
       </div>
-      <a class="btn btn-outline btn-block" id="pd-buy">💬 Order Now on WhatsApp</a>
+      <a class="btn btn-outline btn-block" id="pd-buy">Order Now on WhatsApp</a>
       <div class="pd-trust">
-        <div><b>🚚</b>Nationwide delivery</div>
-        <div><b>💵</b>Cash on delivery</div>
-        <div><b>↩️</b>7-day easy exchange</div>
+        <div>Nationwide delivery</div>
+        <div>Cash on delivery</div>
+        <div>7-day easy exchange</div>
       </div>
     </div>
   </div>
@@ -555,7 +555,7 @@ async function initOffers() {
         <ul>${b.qtyNote ? `<li>${b.qtyNote}</li>` : items.map((p) => `<li>${esc(p.name)}</li>`).join("")}</ul>
         <p style="font-size:.9rem;color:var(--plum-soft);margin-bottom:12px">${b.note}</p>
         <div class="bundle-price"><span class="now">${fmtRs(b.price)}</span><span class="was">${fmtRs(was)}</span></div>
-        <button class="btn btn-gold btn-block" data-bundle="${i}">Claim on WhatsApp 💬</button>
+        <button class="btn btn-gold btn-block" data-bundle="${i}">Claim on WhatsApp</button>
       </div>
     </div>`;
   }).join("");
@@ -584,7 +584,7 @@ City:
 💖 Thank you for shopping with Velvette! We will confirm your order shortly. Please keep your order number safe for tracking.
 🎁 Velvette Rewards: 5 orders = 1 FREE gift!`;
     window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
-    toast("Opening WhatsApp… 💬");
+    toast("Opening WhatsApp…");
   }));
 }
 
@@ -600,10 +600,10 @@ async function initCartPage() {
     if (!lines.length) {
       wrap.innerHTML = `
         <div class="cart-empty">
-          <div class="big">🛍️</div>
+          
           <h2 class="serif">Your bag is empty</h2>
           <p>Pretty things are waiting for you…</p>
-          <a class="btn" href="shop.html" style="margin-top:14px">Shop Now 💖</a>
+          <a class="btn" href="shop.html" style="margin-top:14px">Shop Now</a>
         </div>`;
       updateCartBadge();
       return;
@@ -633,9 +633,9 @@ async function initCartPage() {
       </div>
       <aside class="cart-summary">
         <h3 class="serif">Order Summary</h3>
-        ${shipping > 0 ? `<div class="free-ship">Add ${fmtRs(CONFIG.freeShippingOver - subtotal)} more for <b>FREE delivery</b> 🚚</div>` : ""}
+        ${shipping > 0 ? `<div class="free-ship">Add ${fmtRs(CONFIG.freeShippingOver - subtotal)} more for <b>FREE delivery</b></div>` : ""}
         <div class="sum-row"><span>Subtotal (${Cart.count()} items)</span><span>${fmtRs(subtotal)}</span></div>
-        <div class="sum-row"><span>Delivery (all Pakistan)</span><span>${shipping === 0 ? "FREE 🎉" : fmtRs(shipping)}</span></div>
+        <div class="sum-row"><span>Delivery (all Pakistan)</span><span>${shipping === 0 ? "FREE" : fmtRs(shipping)}</span></div>
         <div class="sum-row total"><span>Total</span><span>${fmtRs(total)}</span></div>
         <form class="checkout-form" id="cart-checkout-form">
           <h4>Delivery Details</h4>
@@ -643,8 +643,8 @@ async function initCartPage() {
           <div class="field"><input name="phone" required placeholder="Phone / WhatsApp *" autocomplete="tel"></div>
           <div class="field"><input name="address" required placeholder="House, street, area *"></div>
           <div class="field"><input name="city" required placeholder="City *"></div>
-          <div class="cod-note">💵 <b>Cash on Delivery</b> available — pay when your order arrives.</div>
-          <button type="submit" class="btn wa-btn btn-block" style="margin-top:4px">📲 Order via WhatsApp</button>
+          <div class="cod-note"><b>Cash on Delivery</b> available — pay when your order arrives.</div>
+          <button type="submit" class="btn wa-btn btn-block" style="margin-top:4px">Order via WhatsApp</button>
           <p class="form-note">You'll be redirected to WhatsApp with your order pre-written.</p>
         </form>
       </aside>
@@ -692,7 +692,7 @@ City: ${fd.get("city")}
 💖 Thank you for shopping with Velvette! We will confirm your order shortly. Please keep your order number safe for tracking.
 🎁 Velvette Rewards: 5 orders = 1 FREE gift!`;
       window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank");
-      toast(`Order ${orderNo} — opening WhatsApp… send the message to confirm ✅`);
+      toast(`Order ${orderNo} — opening WhatsApp… send the message to confirm`);
       Cart.clear();
       render();
     });
